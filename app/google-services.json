@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "790527155060",
+    "firebase_url": "https://clak-10b95.firebaseio.com",
+    "project_id": "clak-10b95",
+    "storage_bucket": "clak-10b95.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:790527155060:android:f16bd0f7a6266f18abea21",
+        "android_client_info": {
+          "package_name": "com.example.clak"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "790527155060-6is92vmpssbbav7137it6e86p5ibs0nc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.clak",
+            "certificate_hash": "2c9aa5cdc41aa66189a1f579c9b1909f23a5a0ab"
+          }
+        },
+        {
+          "client_id": "790527155060-l95grrs0tomj3slsrou817rf8hup4is7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBzb4q9sj63TB65JQgPK0bKIeACZnzFFyw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "790527155060-l95grrs0tomj3slsrou817rf8hup4is7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
