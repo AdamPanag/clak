@@ -11,5 +11,8 @@
     <string name="login_failed">"Login failed"</string>
     <string name="login_continue">"Login"</string>
     <string name="sign_up">"Sign Up"</string>
+    <string name="customer">"Customer"</string>
+    <string name="organization">"Organization"</string>
     <string name="please_wait">Please wait...</string>
+    <string name="title_activity_register">RegisterActivity</string>
 </resources>

@@ -84,7 +84,9 @@ public class MainActivity extends AppCompatActivity {
 
     private void updateUI() {
         FirebaseUser u = mAuth.getCurrentUser();
-        if (u != null) userInfoDisplay.setText(u.getEmail());
+        if (u != null) {
+            userInfoDisplay.setText(u.getEmail());
+        }
     }
 
     private void goToLoginActivity() {

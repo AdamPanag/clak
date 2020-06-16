@@ -23,8 +23,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.781"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.355" />
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintVertical_bias="0.19" />
 
     <EditText
         android:id="@+id/passwordInput"
@@ -46,11 +46,10 @@
         android:id="@+id/loginButton"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
-        android:width="115dp"
         android:layout_gravity="start"
-        android:layout_marginStart="47dp"
-        android:layout_marginBottom="260dp"
-        android:layout_marginLeft="50dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginLeft="64dp"
+        android:width="115dp"
         android:background="@drawable/login_buttons"
         android:enabled="true"
         android:padding="5dp"
@@ -58,21 +57,23 @@
         android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-    />
+        app:layout_constraintTop_toBottomOf="@+id/passwordInput"
+        app:layout_constraintVertical_bias="0.3" />
 
     <Button
         android:id="@+id/signUpButton"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
+        android:layout_marginEnd="64dp"
+        android:layout_marginRight="64dp"
         android:width="115dp"
-        android:layout_marginEnd="47dp"
-        android:layout_marginBottom="260dp"
-        android:layout_marginRight="95dp"
         android:background="@drawable/signup_button"
         android:text="@string/sign_up"
         android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/passwordInput"
+        app:layout_constraintVertical_bias="0.3" />
 
     <ProgressBar
         android:id="@+id/loading"
@@ -95,9 +96,11 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
         android:text="Welcome"
         android:textColor="#000000"
         android:textSize="30sp"
-        tools:layout_editor_absoluteX="100dp"
-        tools:layout_editor_absoluteY="100dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
