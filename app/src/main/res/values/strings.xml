@@ -15,4 +15,10 @@
     <string name="organization">"Organization"</string>
     <string name="please_wait">Please wait...</string>
     <string name="title_activity_register">RegisterActivity</string>
+    <string name="signup_error">Sign up error!</string>
+    <string name="signup_weak_password">This password is too weak for Clak!</string>
+    <string name="signup_invalid_email">Clak needs a valid email to function!</string>
+    <string name="signup_user_exists">Somebody is already Claking with this email!</string>
+    <string name="signup_password_mismatch">Passwords must match</string>
+    <string name="empty_field">This field should not be blank!</string>
 </resources>

@@ -20,6 +20,9 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
+import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -58,15 +61,19 @@ public class CustomerRegisterActivity extends AppCompatActivity {
         registerButton = findViewById(R.id.signUpButton);
 
         email = findViewById(R.id.emailInput);
-        password = findViewById(R.id.passwordInput);
-        password2 = findViewById(R.id.passwordInput2);
         firstName = findViewById(R.id.nameInput);
         surname = findViewById(R.id.surnameInput);
+        password = findViewById(R.id.passwordInput);
+        password2 = findViewById(R.id.passwordInput2);
 
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showLoading();
+                if (!checkFields()) {
+                    dismissLoading();
+                    return;
+                }
                 registerUser(email.getText().toString(), password.getText().toString(),
                              firstName.getText().toString(), surname.getText().toString());
             }
@@ -90,10 +97,58 @@ public class CustomerRegisterActivity extends AppCompatActivity {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());
                             dismissLoading();
-                            Toast.makeText(CustomerRegisterActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
+                            handleRegistrationFailure(task.getException());
                         }
                     }
                 });
+    }
+
+    // Checks whether the field is empty. If empty, it also isplays the error.
+    private boolean isFieldEmpty(EditText text) {
+        if (text.getText().toString().trim().length() == 0) {
+            text.setError(getString(R.string.empty_field));
+            text.requestFocus();
+            return true;
+        }
+        return false;
+    }
+
+    private boolean checkFields() {
+        // Check if any of the fields are empty
+        boolean failed = false;
+        failed |= isFieldEmpty(password2);
+        failed |= isFieldEmpty(password);
+        failed |= isFieldEmpty(email);
+        failed |= isFieldEmpty(surname);
+        failed |= isFieldEmpty(firstName);
+        if (failed)
+            return false;
+
+        // Check whether passwords match
+        if (!password.getText().toString().equals(password2.getText().toString())){
+            password2.setError(getString(R.string.signup_password_mismatch));
+            password2.requestFocus();
+            return false;
+        }
+        return true;
+    }
+
+    private void handleRegistrationFailure(Exception exception) {
+        try {
+            throw exception;
+        } catch(FirebaseAuthUserCollisionException e) {
+            email.setError(getString(R.string.signup_user_exists));
+            email.requestFocus();
+        } catch(FirebaseAuthWeakPasswordException e) {
+            password.setError(getString(R.string.signup_weak_password));
+            password.requestFocus();
+        } catch(FirebaseAuthInvalidCredentialsException e) {
+            email.setError(getString(R.string.signup_invalid_email));
+            email.requestFocus();
+        }  catch(Exception e) {
+            Log.e(TAG, e.getMessage());
+            Toast.makeText(CustomerRegisterActivity.this, R.string.signup_error, Toast.LENGTH_SHORT).show();
+        }
     }
 
     /**
