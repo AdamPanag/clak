@@ -21,4 +21,15 @@
     <string name="signup_user_exists">Somebody is already Claking with this email!</string>
     <string name="signup_password_mismatch">Passwords must match</string>
     <string name="empty_field">This field should not be blank!</string>
+    <string name="title_activity_organization_main">OrganizationMainActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+
 </resources>

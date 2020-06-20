@@ -21,6 +21,9 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -88,7 +91,7 @@ public class LoginActivity extends AppCompatActivity {
                             Log.d(TAG, "signInWithEmail:success");
                             dismissLoading();
                             FirebaseUser user = mAuth.getCurrentUser();
-                            goToMainActivity();
+                            goToMainActivity(user.getUid());
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithEmail:failure", task.getException());
@@ -104,8 +107,36 @@ public class LoginActivity extends AppCompatActivity {
                 });
     }
 
-    private void goToMainActivity() {
-        startActivity(new Intent(this, MainActivity.class));
+    private void goToMainActivity(String userId) {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        DocumentReference docRef = db.collection("customers").document(userId);
+
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        //Enter here only when the user has loged in and his ID is in customers' collection
+                        goToCustomerMainActivity();
+                    } else {
+                        //Enter here only when the user has loged in and his ID is NOT in customers' collection
+                        goToOrganizationMainActivity();
+                    }
+                } else {
+                    Log.d(TAG, "get failed with ", task.getException());
+                }
+            }
+        });
+    }
+
+    public void goToCustomerMainActivity() {
+        startActivity(new Intent(this, CustomerMainActivity.class));
+        finish();
+    }
+
+    public void goToOrganizationMainActivity() {
+        startActivity(new Intent(this, OrganizationMainActivity.class));
         finish();
     }
 

@@ -103,7 +103,7 @@ public class CustomerRegisterActivity extends AppCompatActivity {
                 });
     }
 
-    // Checks whether the field is empty. If empty, it also isplays the error.
+    // Checks whether the field is empty. If empty, it also displays the error.
     private boolean isFieldEmpty(EditText text) {
         if (text.getText().toString().trim().length() == 0) {
             text.setError(getString(R.string.empty_field));
@@ -197,7 +197,7 @@ public class CustomerRegisterActivity extends AppCompatActivity {
     }
 
     private void updateUI() {
-        startActivity(new Intent(this, MainActivity.class));
+        startActivity(new Intent(this, CustomerMainActivity.class));
         finish();
     }
 

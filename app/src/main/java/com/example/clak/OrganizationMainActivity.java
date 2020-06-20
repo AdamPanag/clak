@@ -3,21 +3,29 @@ package com.example.clak;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class MainActivity extends AppCompatActivity {
+import androidx.annotation.NonNull;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
+public class OrganizationMainActivity extends AppCompatActivity {
+
     private final static String TAG = "_MAIN_";
     private static final int RC_SIGN_IN = 9001;
 
@@ -31,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_organization_main);
         initFirebaseAuth();
         initUIComponents();
     }
@@ -71,10 +79,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void intiDatabase() {
-        mDatabase = FirebaseDatabase.getInstance().getReference();
-    }
-
     private void initUIComponents() {
         //toolbar = (Toolbar) findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
@@ -87,10 +91,5 @@ public class MainActivity extends AppCompatActivity {
         if (u != null) {
             userInfoDisplay.setText(u.getEmail());
         }
-    }
-
-    private void goToLoginActivity() {
-        startActivity(new Intent(this, LoginActivity.class));
-        finish();
     }
 }

@@ -12,7 +12,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.clak.classes.Customer;
 import com.example.clak.classes.Organization;
 import com.example.clak.classes.User;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -138,7 +137,7 @@ public class OrganizationRegisterActivity extends AppCompatActivity {
     }
 
     private void updateUI() {
-        startActivity(new Intent(this, MainActivity.class));
+        startActivity(new Intent(this, OrganizationMainActivity.class));
         finish();
     }
 
