@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -29,8 +30,9 @@ public class LoginActivity extends AppCompatActivity {
 
     private Button loginButton;
     private Button signUpButton;
-    private EditText email;
-    private EditText password;
+    private Button showLoginButton;
+    private TextInputLayout email;
+    private TextInputLayout password;
 
     private ProgressDialog progressDialog;
 
@@ -53,19 +55,34 @@ public class LoginActivity extends AppCompatActivity {
     private void initUIComponents() {
         loginButton = (Button) findViewById(R.id.loginButton);
         signUpButton = (Button) findViewById(R.id.signUpButton);
-        email = (EditText) findViewById(R.id.emailInput);
-        password = (EditText) findViewById(R.id.passwordInput);
+        showLoginButton = (Button) findViewById(R.id.showLoginButton);
+        email = (TextInputLayout) findViewById(R.id.emailInput);
+        password = (TextInputLayout) findViewById(R.id.passwordInput);
 
+        showLoginButton.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               if (email.getVisibility() != View.VISIBLE) {
+                   email.setVisibility(View.VISIBLE);
+                   password.setVisibility(View.VISIBLE);
+                   loginButton.setVisibility(View.VISIBLE);
+               } else {
+                   email.setVisibility(View.GONE);
+                   password.setVisibility(View.GONE);
+                   loginButton.setVisibility(View.GONE);
+               }
+           }
+        });
         loginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (TextUtils.isEmpty(email.getText().toString()))
+                @Override
+                public void onClick(View v) {
+                if (TextUtils.isEmpty(email.getEditText().getText().toString()))
                     Toast.makeText(LoginActivity.this, "Email cannot be empty", Toast.LENGTH_LONG).show();
-                else if (TextUtils.isEmpty(password.getText().toString()))
+                else if (TextUtils.isEmpty(password.getEditText().getText().toString()))
                     Toast.makeText(LoginActivity.this, "Password cannot be empty", Toast.LENGTH_LONG).show();
                 else {
                     showLoading();
-                    loginUser(email.getText().toString(), password.getText().toString());
+                    loginUser(email.getEditText().getText().toString(), password.getEditText().getText().toString());
                 }
             }
         });
