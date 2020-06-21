@@ -5,7 +5,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.Menu;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -24,6 +26,8 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import static android.widget.Toast.makeText;
+
 public class OrganizationMainActivity extends AppCompatActivity {
 
     private final static String TAG = "_MAIN_";
@@ -34,7 +38,7 @@ public class OrganizationMainActivity extends AppCompatActivity {
     private DatabaseReference mDatabase;
 
     private TextView userInfoDisplay;
-    private Toolbar toolbar;
+    private Button logout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,6 +88,20 @@ public class OrganizationMainActivity extends AppCompatActivity {
         //setSupportActionBar(toolbar);
 
         userInfoDisplay = (TextView) findViewById(R.id.userInfoDisplay);
+        logout= (Button) findViewById(R.id.logout);
+
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                logoutUser();
+            }
+        });
+    }
+
+    private void logoutUser() {
+        startActivity(new Intent(OrganizationMainActivity.this, LoginActivity.class));
+        FirebaseAuth.getInstance().signOut();
+        makeText(OrganizationMainActivity.this,"See you soon!", Toast.LENGTH_SHORT).show();
     }
 
     private void updateUI() {

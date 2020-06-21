@@ -30,8 +30,6 @@ public class CustomerMainActivity extends AppCompatActivity {
     private DatabaseReference mDatabase;
 
     private TextView userInfoDisplay;
-    private Toolbar toolbar;
-
     private Button logout;
 
     @Override
@@ -86,11 +84,15 @@ public class CustomerMainActivity extends AppCompatActivity {
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(CustomerMainActivity.this, LoginActivity.class));
-                FirebaseAuth.getInstance().signOut();
-                makeText(CustomerMainActivity.this,"See you soon!", Toast.LENGTH_SHORT).show();
+                logoutUser();
             }
         });
+    }
+
+    private void logoutUser() {
+        startActivity(new Intent(CustomerMainActivity.this, LoginActivity.class));
+        FirebaseAuth.getInstance().signOut();
+        makeText(CustomerMainActivity.this,"See you soon!", Toast.LENGTH_SHORT).show();
     }
 
     private void updateUI() {
