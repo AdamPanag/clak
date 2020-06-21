@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -22,7 +21,8 @@
             android:layout_width="@dimen/avatar_size"
             android:layout_height="@dimen/avatar_size"
             android:layout_gravity="center"
-            android:src="@drawable/ic_account" />
+            android:src="@drawable/ic_account"
+            android:contentDescription="@string/todo" />
 
         <TextView
             android:id="@+id/userInfoDisplay"
@@ -30,10 +30,27 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:padding="@dimen/spacingMedium"
-            android:text="No User"
+            android:text="@string/no_user"
             android:textColor="@color/black"
             android:textSize="@dimen/textExtra" />
 
-    </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+            <Button
+                android:id="@+id/logout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/log_out"
+                android:background="@color/red"
+                android:textColor="@color/white"
+
+                />
+
+        </LinearLayout>
+    </LinearLayout>
 </LinearLayout>
+

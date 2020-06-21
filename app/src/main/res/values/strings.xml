@@ -21,4 +21,7 @@
     <string name="signup_user_exists">Somebody is already Claking with this email!</string>
     <string name="signup_password_mismatch">Passwords must match</string>
     <string name="empty_field">This field should not be blank!</string>
+    <string name="log_out">Log out</string>
+    <string name="no_user">No User</string>
+    <string name="todo">TODO</string>
 </resources>
