@@ -79,8 +79,11 @@ public class OrganizationRegisterActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
-                            writeNewUser(email, orgName); //Realtime Database
-                            writeUserToFirestore(email, orgName); // Firestore
+                            FirebaseUser firebaseUser = mAuth.getCurrentUser();
+                            String userId = firebaseUser.getUid();
+
+                            writeNewUser(email, orgName, userId); //Realtime Database
+                            writeUserToFirestore(email, orgName, userId); // Firestore
                             Log.d(TAG, "createUserWithEmail:success");
                             dismissLoading();
                             updateUI();
@@ -99,11 +102,9 @@ public class OrganizationRegisterActivity extends AppCompatActivity {
      * @param email
      * @param orgName
      */
-    private void writeNewUser(String email, String orgName) {
+    private void writeNewUser(String email, String orgName, String userId) {
         mDatabase = FirebaseDatabase.getInstance().getReference();
-        FirebaseUser firebaseUser = mAuth.getCurrentUser();
         User organization = new Organization(email, orgName);
-        String userId = firebaseUser.getUid();
         mDatabase.child("organizations").child(userId).setValue(organization);
     }
 
@@ -112,20 +113,20 @@ public class OrganizationRegisterActivity extends AppCompatActivity {
      * @param email
      * @param orgName
      */
-    private void writeUserToFirestore(String email, String orgName) {
+    private void writeUserToFirestore(String email, String orgName, String userId) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         Map<String, Object> user = new HashMap<>();
         user.put("email", email);
         user.put("orgName", orgName);
 
-        // Add a new document with a generated ID
-        db.collection("organizations")
-                .add(user)
-                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+        // Add a new document with a given ID
+        db.collection("organizations").document(userId)
+                .set(user)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
-                    public void onSuccess(DocumentReference documentReference) {
-                        Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
+                    public void onSuccess(Void aVoid) {
+                        Log.d(TAG, "DocumentSnapshot added.");
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {

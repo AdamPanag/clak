@@ -88,8 +88,11 @@ public class CustomerRegisterActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
-                            writeNewUser(email, name, surname); //Realtime Database
-                            writeUserToFirestore(email, name, surname); // Firestore
+                            FirebaseUser firebaseUser = mAuth.getCurrentUser();
+                            String userId = firebaseUser.getUid();
+
+                            writeNewUser(email, name, surname, userId); //Realtime Database
+                            writeUserToFirestore(email, name, surname, userId); // Firestore
                             Log.d(TAG, "createUserWithEmail:success");
                             dismissLoading();
                             updateUI();
@@ -157,11 +160,9 @@ public class CustomerRegisterActivity extends AppCompatActivity {
      * @param name
      * @param surname
      */
-    private void writeNewUser(String email, String name, String surname) {
+    private void writeNewUser(String email, String name, String surname, String userId) {
         mDatabase = FirebaseDatabase.getInstance().getReference();
-        FirebaseUser firebaseUser = mAuth.getCurrentUser();
         User customer = new Customer(email, name, surname);
-        String userId = firebaseUser.getUid();
         mDatabase.child("customers").child(userId).setValue(customer);
     }
 
@@ -171,7 +172,7 @@ public class CustomerRegisterActivity extends AppCompatActivity {
      * @param name
      * @param surname
      */
-    private void writeUserToFirestore(String email, String name, String surname) {
+    private void writeUserToFirestore(String email, String name, String surname, String userId) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         Map<String, Object> user = new HashMap<>();
@@ -179,13 +180,13 @@ public class CustomerRegisterActivity extends AppCompatActivity {
         user.put("name", name);
         user.put("surname", surname);
 
-        // Add a new document with a generated ID
-        db.collection("customers")
-                .add(user)
-                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+        // Add a new document with a given ID
+        db.collection("customers").document(userId)
+                .set(user)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
-                    public void onSuccess(DocumentReference documentReference) {
-                        Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
+                    public void onSuccess(Void aVoid) {
+                        Log.d(TAG, "DocumentSnapshot added.");
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {

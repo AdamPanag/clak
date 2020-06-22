@@ -22,6 +22,12 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.database.core.Path;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -30,6 +36,8 @@ public class LoginActivity extends AppCompatActivity {
 
     private String TAG = "TAG_Login";
     private FirebaseAuth mAuth;
+    private FirebaseAuth.AuthStateListener mAuthListener;
+    private DatabaseReference mDatabase;
 
     private Button loginButton;
     private Button signUpButton;
@@ -108,6 +116,7 @@ public class LoginActivity extends AppCompatActivity {
                             Log.d(TAG, "signInWithEmail:success");
                             dismissLoading();
                             FirebaseUser user = mAuth.getCurrentUser();
+                            // Go to Customer or Oganization main screen
                             goToMainActivity(user.getUid());
                         } else {
                             // If sign in fails, display a message to the user.
@@ -115,18 +124,15 @@ public class LoginActivity extends AppCompatActivity {
                             dismissLoading();
                             Toast.makeText(LoginActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
-                            //updateUI(null);
-                            // ...
-                        }
 
-                        // ...
+                        }
                     }
                 });
     }
 
-    private void goToMainActivity(String userId) {
+    private void goToMainActivity(String id) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        DocumentReference docRef = db.collection("customers").document(userId);
+        DocumentReference docRef = db.collection("customers").document(id);
 
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
@@ -135,10 +141,10 @@ public class LoginActivity extends AppCompatActivity {
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
                         //Enter here only when the user has loged in and his ID is in customers' collection
-                        goToCustomerMainActivity();
+                        goToCustomerMainActivity(); //Customer
                     } else {
                         //Enter here only when the user has loged in and his ID is NOT in customers' collection
-                        goToOrganizationMainActivity();
+                        goToOrganizationMainActivity(); //Organization
                     }
                 } else {
                     Log.d(TAG, "get failed with ", task.getException());
@@ -174,5 +180,4 @@ public class LoginActivity extends AppCompatActivity {
         if (progressDialog != null)
             progressDialog.dismiss();
     }
-
 }

@@ -56,7 +56,6 @@ public class CustomerMainActivity extends AppCompatActivity {
         }
     }
 
-
     private void initFirebaseAuth() {
         mAuth = FirebaseAuth.getInstance();
         mAuthListener = new FirebaseAuth.AuthStateListener() {
