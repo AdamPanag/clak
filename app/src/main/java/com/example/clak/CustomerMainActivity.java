@@ -71,7 +71,6 @@ public class CustomerMainActivity extends AppCompatActivity {
                 }
             }
         };
-
     }
 
     private void initUIComponents() {
@@ -91,7 +90,7 @@ public class CustomerMainActivity extends AppCompatActivity {
     private void logoutUser() {
         startActivity(new Intent(CustomerMainActivity.this, LoginActivity.class));
         FirebaseAuth.getInstance().signOut();
-        makeText(CustomerMainActivity.this,"See you soon!", Toast.LENGTH_SHORT).show();
+        makeText(CustomerMainActivity.this, R.string.see_you_soon, Toast.LENGTH_SHORT).show();
     }
 
     private void updateUI() {

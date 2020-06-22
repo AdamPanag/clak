@@ -93,7 +93,7 @@ public class OrganizationMainActivity extends AppCompatActivity {
     private void logoutUser() {
         startActivity(new Intent(OrganizationMainActivity.this, LoginActivity.class));
         FirebaseAuth.getInstance().signOut();
-        makeText(OrganizationMainActivity.this,"See you soon!", Toast.LENGTH_SHORT).show();
+        makeText(OrganizationMainActivity.this, R.string.see_you_soon, Toast.LENGTH_SHORT).show();
     }
 
     private void updateUI() {

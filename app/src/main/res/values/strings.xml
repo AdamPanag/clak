@@ -15,6 +15,7 @@
     <string name="organization">"Organization"</string>
     <string name="please_wait">Please wait...</string>
     <string name="title_activity_register">RegisterActivity</string>
+    <string name="see_you_soon">See you soon!</string>
     <string name="signup_error">Sign up error!</string>
     <string name="signup_weak_password">This password is too weak for Clak!</string>
     <string name="signup_invalid_email">Clak needs a valid email to function!</string>
