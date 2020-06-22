@@ -116,7 +116,7 @@ public class LoginActivity extends AppCompatActivity {
                             Log.d(TAG, "signInWithEmail:success");
                             dismissLoading();
                             FirebaseUser user = mAuth.getCurrentUser();
-                            // Go to Customer or Oganization main screen
+                            // Go to Customer or Organization main screen
                             goToMainActivity(user.getUid());
                         } else {
                             // If sign in fails, display a message to the user.
@@ -130,6 +130,15 @@ public class LoginActivity extends AppCompatActivity {
                 });
     }
 
+    /**
+     * Checks if the current user's ID exists in the 'customers' collection.
+     * If it does, redirects the user to customer's main activity-screen.
+     * If it doesn't, redirects the user to organization's main activity-screen
+     * (since there is no other type of user).
+     *
+     * P.S. It is not expandable, but it works.
+     * @param id
+     */
     private void goToMainActivity(String id) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         DocumentReference docRef = db.collection("customers").document(id);
