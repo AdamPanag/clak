@@ -24,4 +24,9 @@
     <string name="log_out">Log out</string>
     <string name="no_user">No User</string>
     <string name="todo">TODO</string>
+    <string name="organization_name">Organization Name</string>
+    <string name="repeat_password">Repeat password</string>
+    <string name="email_address">Email address</string>
+    <string name="name">Name</string>
+    <string name="surname">Surname</string>
 </resources>
