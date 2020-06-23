@@ -12,7 +12,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.clak.classes.Customer;
 import com.example.clak.classes.Organization;
 import com.example.clak.classes.User;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -30,58 +29,61 @@ import com.google.firebase.firestore.DocumentReference;
 import java.util.HashMap;
 import java.util.Map;
 
-public class OrganizationRegisterActivity extends AppCompatActivity {
+public class OrganizationRegisterActivity extends AbstractRegisterActivity {
 
     private String TAG = "TAG_Register";
 
     private FirebaseAuth mAuth;
-    private FirebaseAuth.AuthStateListener mAuthListener;
     private DatabaseReference mDatabase;
 
-    private Button registerButton;
-    private EditText email;
-    private EditText password;
-    private EditText password2;
+
     private EditText orgName;
-    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_organization_register);
         mAuth = FirebaseAuth.getInstance();
 
         initUIComponents();
     }
 
-    private void initUIComponents() {
-        registerButton = findViewById(R.id.signUpButton);
-
-        email = findViewById(R.id.emailInput);
-        password = findViewById(R.id.passwordInput);
-        password2 = findViewById(R.id.passwordInput2);
+    protected void initUIComponents() {
+        setContentView(R.layout.activity_organization_register);
+        super.initUIComponents();
         orgName = findViewById(R.id.orgNameInput);
-
-        registerButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showLoading();
-                registerUser(email.getText().toString(), password.getText().toString(),
-                        orgName.getText().toString());
-            }
-        });
     }
 
-    private void registerUser(final String email, String password, final String orgName) {
+    @Override
+    protected void createRegistrationInfo() {
+        super.createRegistrationInfo();
+        registrationInfo.put("orgName", orgName.getText().toString());
+    }
+
+    @Override
+    protected boolean checkFields() {
+        boolean ok = super.checkFields();
+        ok = !isFieldEmpty(orgName) && ok;
+
+        return ok;
+    }
+
+    @Override
+    protected void registerUser(Map<String, String> registrationInfo) {
         //https://firebase.google.com/docs/auth/android/start/
+        final String email = registrationInfo.get("email");
+        final String password = registrationInfo.get("password");
+        final String orgName = registrationInfo.get("orgName");
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(OrganizationRegisterActivity.this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
-                            writeNewUser(email, orgName); //Realtime Database
-                            writeUserToFirestore(email, orgName); // Firestore
+                            FirebaseUser firebaseUser = mAuth.getCurrentUser();
+                            String userId = firebaseUser.getUid();
+
+                            writeNewUser(email, orgName, userId); //Realtime Database
+                            writeUserToFirestore(email, orgName, userId); // Firestore
                             Log.d(TAG, "createUserWithEmail:success");
                             dismissLoading();
                             updateUI();
@@ -89,7 +91,7 @@ public class OrganizationRegisterActivity extends AppCompatActivity {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());
                             dismissLoading();
-                            Toast.makeText(OrganizationRegisterActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
+                            handleRegistrationFailure(task.getException());
                         }
                     }
                 });
@@ -100,11 +102,9 @@ public class OrganizationRegisterActivity extends AppCompatActivity {
      * @param email
      * @param orgName
      */
-    private void writeNewUser(String email, String orgName) {
+    private void writeNewUser(String email, String orgName, String userId) {
         mDatabase = FirebaseDatabase.getInstance().getReference();
-        FirebaseUser firebaseUser = mAuth.getCurrentUser();
         User organization = new Organization(email, orgName);
-        String userId = firebaseUser.getUid();
         mDatabase.child("organizations").child(userId).setValue(organization);
     }
 
@@ -113,20 +113,20 @@ public class OrganizationRegisterActivity extends AppCompatActivity {
      * @param email
      * @param orgName
      */
-    private void writeUserToFirestore(String email, String orgName) {
+    private void writeUserToFirestore(String email, String orgName, String userId) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         Map<String, Object> user = new HashMap<>();
         user.put("email", email);
         user.put("orgName", orgName);
 
-        // Add a new document with a generated ID
-        db.collection("organizations")
-                .add(user)
-                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+        // Add a new document with a given ID
+        db.collection("organizations").document(userId)
+                .set(user)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
-                    public void onSuccess(DocumentReference documentReference) {
-                        Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
+                    public void onSuccess(Void aVoid) {
+                        Log.d(TAG, "DocumentSnapshot added.");
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -138,21 +138,8 @@ public class OrganizationRegisterActivity extends AppCompatActivity {
     }
 
     private void updateUI() {
-        startActivity(new Intent(this, MainActivity.class));
+        startActivity(new Intent(this, OrganizationMainActivity.class));
         finish();
     }
 
-    private void showLoading() {
-        if (progressDialog == null)
-            progressDialog = new ProgressDialog(this);
-
-        progressDialog.setMessage(getString(R.string.please_wait));
-        progressDialog.setCancelable(false);
-        progressDialog.show();
-    }
-
-    private void dismissLoading() {
-        if (progressDialog != null)
-            progressDialog.dismiss();
-    }
 }

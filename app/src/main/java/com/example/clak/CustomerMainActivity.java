@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+import static android.widget.Toast.makeText;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,9 +20,8 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import static android.widget.Toast.makeText;
+public class CustomerMainActivity extends AppCompatActivity {
 
-public class MainActivity extends AppCompatActivity {
     private final static String TAG = "_MAIN_";
     private static final int RC_SIGN_IN = 9001;
 
@@ -30,14 +30,12 @@ public class MainActivity extends AppCompatActivity {
     private DatabaseReference mDatabase;
 
     private TextView userInfoDisplay;
-    private Toolbar toolbar;
-
     private Button logout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_customer_main);
         initFirebaseAuth();
         initUIComponents();
     }
@@ -58,7 +56,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
     private void initFirebaseAuth() {
         mAuth = FirebaseAuth.getInstance();
         mAuthListener = new FirebaseAuth.AuthStateListener() {
@@ -74,11 +71,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         };
-
-    }
-
-    private void intiDatabase() {
-        mDatabase = FirebaseDatabase.getInstance().getReference();
     }
 
     private void initUIComponents() {
@@ -90,11 +82,15 @@ public class MainActivity extends AppCompatActivity {
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, LoginActivity.class));
-                FirebaseAuth.getInstance().signOut();
-                makeText(MainActivity.this,"See you soon!", Toast.LENGTH_SHORT).show();
+                logoutUser();
             }
         });
+    }
+
+    private void logoutUser() {
+        startActivity(new Intent(CustomerMainActivity.this, LoginActivity.class));
+        FirebaseAuth.getInstance().signOut();
+        makeText(CustomerMainActivity.this, R.string.see_you_soon, Toast.LENGTH_SHORT).show();
     }
 
     private void updateUI() {
@@ -102,10 +98,5 @@ public class MainActivity extends AppCompatActivity {
         if (u != null) {
             userInfoDisplay.setText(u.getEmail());
         }
-    }
-
-    private void goToLoginActivity() {
-        startActivity(new Intent(this, LoginActivity.class));
-        finish();
     }
 }
