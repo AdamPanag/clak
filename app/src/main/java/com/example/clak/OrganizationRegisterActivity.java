@@ -29,50 +29,50 @@ import com.google.firebase.firestore.DocumentReference;
 import java.util.HashMap;
 import java.util.Map;
 
-public class OrganizationRegisterActivity extends AppCompatActivity {
+public class OrganizationRegisterActivity extends AbstractRegisterActivity {
 
     private String TAG = "TAG_Register";
 
     private FirebaseAuth mAuth;
-    private FirebaseAuth.AuthStateListener mAuthListener;
     private DatabaseReference mDatabase;
 
-    private Button registerButton;
-    private EditText email;
-    private EditText password;
-    private EditText password2;
+
     private EditText orgName;
-    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_organization_register);
         mAuth = FirebaseAuth.getInstance();
 
         initUIComponents();
     }
 
-    private void initUIComponents() {
-        registerButton = findViewById(R.id.signUpButton);
-
-        email = findViewById(R.id.emailInput);
-        password = findViewById(R.id.passwordInput);
-        password2 = findViewById(R.id.passwordInput2);
+    protected void initUIComponents() {
+        setContentView(R.layout.activity_organization_register);
+        super.initUIComponents();
         orgName = findViewById(R.id.orgNameInput);
-
-        registerButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showLoading();
-                registerUser(email.getText().toString(), password.getText().toString(),
-                        orgName.getText().toString());
-            }
-        });
     }
 
-    private void registerUser(final String email, String password, final String orgName) {
+    @Override
+    protected void createRegistrationInfo() {
+        super.createRegistrationInfo();
+        registrationInfo.put("orgName", orgName.getText().toString());
+    }
+
+    @Override
+    protected boolean checkFields() {
+        boolean ok = super.checkFields();
+        ok = !isFieldEmpty(orgName) && ok;
+
+        return ok;
+    }
+
+    @Override
+    protected void registerUser(Map<String, String> registrationInfo) {
         //https://firebase.google.com/docs/auth/android/start/
+        final String email = registrationInfo.get("email");
+        final String password = registrationInfo.get("password");
+        final String orgName = registrationInfo.get("orgName");
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(OrganizationRegisterActivity.this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -91,7 +91,7 @@ public class OrganizationRegisterActivity extends AppCompatActivity {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());
                             dismissLoading();
-                            Toast.makeText(OrganizationRegisterActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
+                            handleRegistrationFailure(task.getException());
                         }
                     }
                 });
@@ -142,17 +142,4 @@ public class OrganizationRegisterActivity extends AppCompatActivity {
         finish();
     }
 
-    private void showLoading() {
-        if (progressDialog == null)
-            progressDialog = new ProgressDialog(this);
-
-        progressDialog.setMessage(getString(R.string.please_wait));
-        progressDialog.setCancelable(false);
-        progressDialog.show();
-    }
-
-    private void dismissLoading() {
-        if (progressDialog != null)
-            progressDialog.dismiss();
-    }
 }
