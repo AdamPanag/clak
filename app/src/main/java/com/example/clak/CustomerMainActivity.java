@@ -15,22 +15,29 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class CustomerMainActivity extends AppCompatActivity {
 
     private final static String TAG = "_MAIN_";
-    private static final int RC_SIGN_IN = 9001;
 
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
-    private DatabaseReference mDatabase;
+    private FirebaseUser user;
 
-    private TextView userInfoDisplay;
+    private TextView name;
+    private TextView surname;
     private Button logout;
+    private Button myConnectionsBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +51,7 @@ public class CustomerMainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         mAuth.addAuthStateListener(mAuthListener);
-        FirebaseUser u = mAuth.getCurrentUser();
+        user = mAuth.getCurrentUser();
         updateUI();
     }
 
@@ -67,17 +74,23 @@ public class CustomerMainActivity extends AppCompatActivity {
                     updateUI();
                 } else {
                     Log.d(TAG, "onAuthStateChanged:signed_out");
-                    userInfoDisplay.setText("No user");
                 }
             }
         };
     }
 
     private void initUIComponents() {
-        //toolbar = (Toolbar) findViewById(R.id.toolbar);
-        //setSupportActionBar(toolbar);
-        userInfoDisplay = (TextView) findViewById(R.id.userInfoDisplay);
-        logout= (Button) findViewById(R.id.logout);
+        name = (TextView) findViewById(R.id.name);
+        surname = (TextView) findViewById(R.id.surname);
+        myConnectionsBtn = (Button) findViewById(R.id.myConnectionsBtn);
+        logout = (Button) findViewById(R.id.logout);
+
+        myConnectionsBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToMyConnections();
+            }
+        });
 
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,9 +107,31 @@ public class CustomerMainActivity extends AppCompatActivity {
     }
 
     private void updateUI() {
-        FirebaseUser u = mAuth.getCurrentUser();
-        if (u != null) {
-            userInfoDisplay.setText(u.getEmail());
+        // If user exists, display name and surname
+        if (user != null) {
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+            DocumentReference docRef = db.collection("customers").document(user.getUid());
+            docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if (task.isSuccessful()) {
+                        DocumentSnapshot document = task.getResult();
+                        if (document.exists()) {
+                            Log.d(TAG, "DocumentSnapshot data: " + document.getData());
+                            name.setText(document.getData().get("name").toString()); //display name
+                            surname.setText(document.getData().get("surname").toString()); //display surname
+                        } else {
+                            Log.d(TAG, "No such document");
+                        }
+                    } else {
+                        Log.d(TAG, "get failed with ", task.getException());
+                    }
+                }
+            });
         }
+    }
+
+    private void goToMyConnections() {
+        //startActivity(new Intent(CustomerMainActivity.this, MyConnections.class));
     }
 }

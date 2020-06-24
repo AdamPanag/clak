@@ -36,7 +36,6 @@ public class OrganizationRegisterActivity extends AbstractRegisterActivity {
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
 
-
     private EditText orgName;
 
     @Override
