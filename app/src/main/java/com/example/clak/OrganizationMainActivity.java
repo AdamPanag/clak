@@ -9,9 +9,14 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import androidx.annotation.NonNull;
 
@@ -27,9 +32,11 @@ public class OrganizationMainActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
-    private DatabaseReference mDatabase;
+    private FirebaseUser user;
 
-    private TextView userInfoDisplay;
+    private TextView name;
+    private TextView email;
+
     private Button logout;
 
     @Override
@@ -44,7 +51,7 @@ public class OrganizationMainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         mAuth.addAuthStateListener(mAuthListener);
-        FirebaseUser u = mAuth.getCurrentUser();
+        user = mAuth.getCurrentUser();
         updateUI();
     }
 
@@ -68,7 +75,6 @@ public class OrganizationMainActivity extends AppCompatActivity {
                     updateUI();
                 } else {
                     Log.d(TAG, "onAuthStateChanged:signed_out");
-                    userInfoDisplay.setText("No user");
                 }
             }
         };
@@ -76,11 +82,10 @@ public class OrganizationMainActivity extends AppCompatActivity {
     }
 
     private void initUIComponents() {
-        //toolbar = (Toolbar) findViewById(R.id.toolbar);
-        //setSupportActionBar(toolbar);
+        name = (TextView) findViewById(R.id.name);
+        email = (TextView) findViewById(R.id.email);
 
-        userInfoDisplay = (TextView) findViewById(R.id.userInfoDisplay);
-        logout= (Button) findViewById(R.id.logout);
+        logout = (Button) findViewById(R.id.logout);
 
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,7 +104,25 @@ public class OrganizationMainActivity extends AppCompatActivity {
     private void updateUI() {
         FirebaseUser u = mAuth.getCurrentUser();
         if (u != null) {
-            userInfoDisplay.setText(u.getEmail());
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+            DocumentReference docRef = db.collection("organizations").document(user.getUid());
+            docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if (task.isSuccessful()) {
+                        DocumentSnapshot document = task.getResult();
+                        if (document.exists()) {
+                            Log.d(TAG, "DocumentSnapshot data: " + document.getData());
+                                name.setText(document.getData().get("orgName").toString());
+                                email.setText(document.getData().get("email").toString());
+                        } else {
+                            Log.d(TAG, "No such document");
+                        }
+                    } else {
+                        Log.d(TAG, "get failed with ", task.getException());
+                    }
+                }
+            });
         }
     }
 }

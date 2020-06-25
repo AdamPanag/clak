@@ -6,48 +6,81 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    tools:openDrawer="start" >
+    android:background="@color/white"
+    android:focusable="true"
+    android:focusableInTouchMode="true" >
 
     <ImageView
+        android:id="@+id/orgPic"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:contentDescription="@string/todo"
         android:src="@drawable/ic_account"
-        app:layout_constraintBottom_toTopOf="@+id/userInfoDisplay"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintBottom_toTopOf="@+id/name"
+        />
 
     <TextView
-        android:id="@+id/userInfoDisplay"
+        android:id="@+id/name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/no_user"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.2" />
+        android:textSize="25sp"
+        android:textColor="@color/black"
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/orgPic"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userInfoDisplay"
+        />
+
+    <TextView
+        android:id="@+id/email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/email_address"
+        android:textSize="20sp"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/name"
+        app:layout_constraintVertical_bias="1" />
+
+    <GridLayout
+        android:id="@+id/gridLayout"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:columnCount="2"
+        android:padding="10dp"
+
+        android:rowCount="1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_weight="8"
+        app:layout_constraintTop_toBottomOf="@+id/name"
         app:layout_constraintVertical_bias="1">
 
+        <!-- Row 1 -->
         <Button
             android:id="@+id/logout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/red"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="0.2"
+            android:layout_columnWeight="0.3"
+            android:background="@drawable/logout_corners"
             android:text="@string/log_out"
-            android:textColor="@color/white"/>
+            android:textColor="@color/white"
+            />
 
-    </LinearLayout>
+        <Button
+            android:id="@+id/settings"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="0.2"
+            android:layout_columnWeight="0.7"
+            android:background="@drawable/settings_corners"
+
+            android:text="Settings"
+            android:textColor="@color/blue_with_opacity" />
+
+    </GridLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
