@@ -36,17 +36,15 @@ public class OrganizationRegisterActivity extends AbstractRegisterActivity {
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
 
-
     private EditText orgName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mAuth = FirebaseAuth.getInstance();
-
-        initUIComponents();
     }
 
+    @Override
     protected void initUIComponents() {
         setContentView(R.layout.activity_organization_register);
         super.initUIComponents();
