@@ -98,7 +98,7 @@ public abstract class AbstractRegisterActivity extends AppCompatActivity {
         return true;
     }
 
-    // Hightlight corresponding field, in case registration fails
+    // Highlight corresponding field, in case registration fails
     protected void handleRegistrationFailure(Exception exception) {
         try {
             throw exception;

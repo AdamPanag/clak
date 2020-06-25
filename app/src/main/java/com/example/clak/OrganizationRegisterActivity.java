@@ -50,7 +50,7 @@ public class OrganizationRegisterActivity extends AbstractRegisterActivity {
     protected void initUIComponents() {
         setContentView(R.layout.activity_organization_register);
         super.initUIComponents();
-        orgName = findViewById(R.id.orgNameInput);
+        orgName = findViewById(R.id.orgInput);
     }
 
     @Override

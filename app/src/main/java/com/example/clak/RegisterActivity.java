@@ -7,7 +7,15 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+
 public class RegisterActivity extends AppCompatActivity {
+
+    private String TAG = "TAG_Register";
+
+    private FirebaseAuth mAuth;
+    private DatabaseReference mDatabase;
 
     private Button sgnUpAsCustomerBtn;
     private Button sgnUpAsOrganizationBtn;

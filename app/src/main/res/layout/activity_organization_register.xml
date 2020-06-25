@@ -6,53 +6,52 @@
     android:layout_height="match_parent"
     tools:context=".OrganizationRegisterActivity">
 
-    <Button
-        android:id="@+id/signUpButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/sign_up"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/passwordInput2"
-        app:layout_constraintVertical_bias="0.19" />
-
+    <!--Here begins the fields of organization-->
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/orgTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/organization_name"
+        android:textColor="@color/black"
+        android:visibility="visible"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.110000014"
-        android:textColor="@color/black"/>
+        app:layout_constraintVertical_bias="0.2"
+        />
 
     <EditText
-        android:id="@+id/orgNameInput"
+        android:id="@+id/orgInput"
         android:layout_width="wrap_content"
         android:layout_height="30dp"
         android:background="@drawable/field_background"
         android:ems="10"
         android:gravity="center"
         android:inputType="textPersonName"
+        android:elevation="10dp"
+        android:outlineSpotShadowColor="@color/black"
+        android:visibility="visible"
+
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+        app:layout_constraintTop_toBottomOf="@+id/orgTitle" />
 
     <TextView
-        android:id="@+id/emailAddress"
+        android:id="@+id/emailTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/email_address"
+        android:textColor="@color/black"
+        android:visibility="visible"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/orgNameInput"
-        app:layout_constraintVertical_bias="0.08"
-        android:textColor="@color/black"/>
+        app:layout_constraintTop_toBottomOf="@+id/orgInput"
+        app:layout_constraintVertical_bias="0.03"
+        />
 
     <EditText
         android:id="@+id/emailInput"
@@ -62,9 +61,28 @@
         android:gravity="center"
         android:inputType="textEmailAddress"
         android:background="@drawable/field_background"
+        android:elevation="10dp"
+        android:outlineSpotShadowColor="@color/black"
+        android:visibility="visible"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/emailAddress"/>
+        app:layout_constraintTop_toBottomOf="@+id/emailTitle"/>
+
+    <TextView
+        android:id="@+id/passwordTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Password"
+        android:textColor="@color/black"
+        android:visibility="visible"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/emailInput"
+        app:layout_constraintVertical_bias="0.03"
+        />
 
     <EditText
         android:id="@+id/passwordInput"
@@ -74,34 +92,29 @@
         android:gravity="center"
         android:inputType="textPassword"
         android:background="@drawable/field_background"
+        android:elevation="10dp"
+        android:outlineSpotShadowColor="@color/black"
+        android:visibility="visible"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView7"
+        app:layout_constraintTop_toBottomOf="@+id/passwordTitle"
         />
 
     <TextView
-        android:id="@+id/textView7"
+        android:id="@+id/passwordTitle2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Password"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/emailInput"
-        app:layout_constraintVertical_bias="0.089999974"
-        android:textColor="@color/black"/>
-
-    <TextView
-        android:id="@+id/textView8"
-        android:layout_width="wrap_content"
-        android:layout_height="30dp"
         android:text="@string/repeat_password"
+        android:textColor="@color/black"
+        android:visibility="visible"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/passwordInput"
-        app:layout_constraintVertical_bias="0.089999974"
-        android:textColor="@color/black" />
+        app:layout_constraintVertical_bias="0.03"
+        />
 
     <EditText
         android:id="@+id/passwordInput2"
@@ -111,7 +124,26 @@
         android:gravity="center"
         android:inputType="textPassword"
         android:background="@drawable/field_background"
+        android:elevation="10dp"
+        android:outlineSpotShadowColor="@color/black"
+        android:visibility="visible"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView8" />
+        app:layout_constraintTop_toBottomOf="@+id/passwordTitle2"
+        />
+
+    <Button
+        android:id="@+id/signUpButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/sign_up"
+        android:visibility="visible"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/passwordInput2"
+        app:layout_constraintVertical_bias="0.05" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
