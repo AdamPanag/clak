@@ -3,6 +3,8 @@ package com.example.clak;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
 import android.widget.Button;
@@ -21,6 +23,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import androidx.annotation.NonNull;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 
 import static android.widget.Toast.makeText;
@@ -33,6 +36,7 @@ public class OrganizationMainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private FirebaseUser user;
+    private Toolbar toolbar;
 
     private TextView name;
     private TextView email;
@@ -43,6 +47,9 @@ public class OrganizationMainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_organization_main);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle("Clak");
+        setSupportActionBar(toolbar);
         initFirebaseAuth();
         initUIComponents();
     }
@@ -53,6 +60,27 @@ public class OrganizationMainActivity extends AppCompatActivity {
         mAuth.addAuthStateListener(mAuthListener);
         user = mAuth.getCurrentUser();
         updateUI();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.organization_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.logout_toolbar:
+                logoutUser();
+
+            default:
+                // If we got here, the user's action was not recognized.
+                // Invoke the superclass to handle it.
+                return super.onOptionsItemSelected(item);
+
+        }
     }
 
     @Override

@@ -38,7 +38,6 @@ public class CustomerMainActivity extends AppCompatActivity {
 
     private TextView name;
     private TextView surname;
-    private Button logout;
     private Button myConnectionsBtn;
 
     @Override
@@ -57,6 +56,27 @@ public class CustomerMainActivity extends AppCompatActivity {
         mAuth.addAuthStateListener(mAuthListener);
         user = mAuth.getCurrentUser();
         updateUI();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.customer_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.logout_toolbar:
+                logoutUser();
+
+            default:
+                // If we got here, the user's action was not recognized.
+                // Invoke the superclass to handle it.
+                return super.onOptionsItemSelected(item);
+
+        }
     }
 
     @Override
@@ -130,27 +150,4 @@ public class CustomerMainActivity extends AppCompatActivity {
     private void goToMyConnections() {
         //startActivity(new Intent(CustomerMainActivity.this, MyConnections.class));
     }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.customer_menu, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.logout_toolbar:
-                // User chose the "Settings" item, show the app settings UI...
-                logoutUser();
-
-            default:
-                // If we got here, the user's action was not recognized.
-                // Invoke the superclass to handle it.
-                return super.onOptionsItemSelected(item);
-
-        }
-    }
-
 }

@@ -33,6 +33,7 @@
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
     <string name="my_connections">My Connections</string>
+    <string name="my_clients">My Clients</string>
     <string name="log_out">Log out</string>
     <string name="no_user">No User</string>
     <string name="todo">TODO</string>

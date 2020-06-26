@@ -3,12 +3,23 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/toolbar"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
     android:focusable="true"
     android:focusableInTouchMode="true" >
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
     <ImageView
         android:id="@+id/orgPic"
@@ -16,21 +27,24 @@
         android:layout_height="100dp"
         android:contentDescription="@string/todo"
         android:src="@drawable/ic_account"
-        app:layout_constraintBottom_toTopOf="@+id/name"
-        />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:layout_constraintVertical_bias="0.05"
+        tools:layout_editor_absoluteX="-16dp" />
 
     <TextView
         android:id="@+id/name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/no_user"
-        android:textSize="25sp"
         android:textColor="@color/black"
+        android:textSize="25sp"
 
-        app:layout_constraintBottom_toBottomOf="@id/orgPic"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/orgPic"
+        app:layout_constraintVertical_bias="0.05" />
 
     <TextView
         android:id="@+id/email"
@@ -39,10 +53,43 @@
         android:text="@string/email_address"
         android:textSize="20sp"
 
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/name"
-        app:layout_constraintVertical_bias="1" />
+        app:layout_constraintVertical_bias="0.05" />
+
+    <Button
+        android:id="@+id/connectButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:paddingHorizontal="10dp"
+        android:background="@drawable/connect_btn_background"
+        android:text="Clak"
+        android:drawableLeft="@drawable/ic_connect_clak"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.9"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.94" />
+
+    <Button
+        android:id="@+id/addNewClientButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="@drawable/connect_btn_background"
+        android:drawableLeft="@drawable/ic_connect_clak"
+        android:paddingHorizontal="10dp"
+        android:text="Add new Client"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.94" />
 
     <GridLayout
         android:id="@+id/gridLayout"
@@ -56,7 +103,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_weight="8"
         app:layout_constraintTop_toBottomOf="@+id/name"
-        app:layout_constraintVertical_bias="1">
+        app:layout_constraintVertical_bias="1.0">
 
         <!-- Row 1 -->
         <Button
@@ -67,8 +114,7 @@
             android:layout_columnWeight="0.3"
             android:background="@drawable/logout_corners"
             android:text="@string/log_out"
-            android:textColor="@color/white"
-            />
+            android:textColor="@color/white" />
 
         <Button
             android:id="@+id/settings"
@@ -82,5 +128,18 @@
             android:textColor="@color/blue_with_opacity" />
 
     </GridLayout>
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/colorAccent"
+        android:paddingHorizontal="10dp"
+        android:text="@string/my_clients"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/email"
+        app:layout_constraintVertical_bias="0.1" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
