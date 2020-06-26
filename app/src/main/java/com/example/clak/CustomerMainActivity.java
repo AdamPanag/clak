@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -33,6 +34,7 @@ public class CustomerMainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private FirebaseUser user;
+    private Toolbar toolbar;
 
     private TextView name;
     private TextView surname;
@@ -43,6 +45,8 @@ public class CustomerMainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_main);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
         initFirebaseAuth();
         initUIComponents();
     }
@@ -83,19 +87,11 @@ public class CustomerMainActivity extends AppCompatActivity {
         name = (TextView) findViewById(R.id.name);
         surname = (TextView) findViewById(R.id.surname);
         myConnectionsBtn = (Button) findViewById(R.id.myConnectionsBtn);
-        logout = (Button) findViewById(R.id.logout);
 
         myConnectionsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 goToMyConnections();
-            }
-        });
-
-        logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                logoutUser();
             }
         });
     }
@@ -134,4 +130,27 @@ public class CustomerMainActivity extends AppCompatActivity {
     private void goToMyConnections() {
         //startActivity(new Intent(CustomerMainActivity.this, MyConnections.class));
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.customer_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.logout_toolbar:
+                // User chose the "Settings" item, show the app settings UI...
+                logoutUser();
+
+            default:
+                // If we got here, the user's action was not recognized.
+                // Invoke the superclass to handle it.
+                return super.onOptionsItemSelected(item);
+
+        }
+    }
+
 }
