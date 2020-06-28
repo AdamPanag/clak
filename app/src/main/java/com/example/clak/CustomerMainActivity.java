@@ -148,6 +148,6 @@ public class CustomerMainActivity extends AppCompatActivity {
     }
 
     private void goToMyConnections() {
-        //startActivity(new Intent(CustomerMainActivity.this, MyConnections.class));
+        startActivity(new Intent(CustomerMainActivity.this, MyConnectionsActivity.class));
     }
 }
