@@ -42,4 +42,12 @@
     <string name="email_address">Email address</string>
     <string name="name">Name</string>
     <string name="surname">Surname</string>
+    <string name="counting_claks">Counting times claked...</string>
+    <string name="visited_times">Claked %d times</string>
+    <string name="error_fetch">Error fetching data</string>
+    <string name="delete">Delete</string>
+    <string name="deleting">Deleting...</string>
+    <string name="deleted">Deleted!</string>
+    <string name="error_occured">An error occurred...</string>
+    <string name="error">Error!</string>
 </resources>

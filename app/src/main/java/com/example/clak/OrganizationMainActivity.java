@@ -42,6 +42,7 @@ public class OrganizationMainActivity extends AppCompatActivity {
     private TextView email;
 
     private Button logout;
+    private Button myClientsBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -114,6 +115,7 @@ public class OrganizationMainActivity extends AppCompatActivity {
         email = (TextView) findViewById(R.id.email);
 
         logout = (Button) findViewById(R.id.logout);
+        myClientsBtn = (Button) findViewById(R.id.my_clients_btn);
 
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -121,6 +123,13 @@ public class OrganizationMainActivity extends AppCompatActivity {
                 logoutUser();
             }
         });
+        myClientsBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showMyClients();
+            }
+        });
+
     }
 
     private void logoutUser() {
@@ -152,5 +161,9 @@ public class OrganizationMainActivity extends AppCompatActivity {
                 }
             });
         }
+    }
+
+    private void showMyClients() {
+        startActivity(new Intent(this, MyCustomersActivity.class));
     }
 }
