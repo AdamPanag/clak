@@ -73,7 +73,6 @@ public class CustomerRegisterActivity extends AbstractRegisterActivity {
                             FirebaseUser firebaseUser = mAuth.getCurrentUser();
                             String userId = firebaseUser.getUid();
 
-                            writeNewUser(email, name, surname, userId); //Realtime Database
                             writeUserToFirestore(email, name, surname, userId); // Firestore
                             Log.d(TAG, "createUserWithEmail:success");
                             dismissLoading();
@@ -95,18 +94,6 @@ public class CustomerRegisterActivity extends AbstractRegisterActivity {
         ok = !isFieldEmpty(firstName) && ok;
 
         return ok;
-    }
-
-    /**
-     * Write the new user to the real time database of Firebase
-     * @param email
-     * @param name
-     * @param surname
-     */
-    private void writeNewUser(String email, String name, String surname, String userId) {
-        mDatabase = FirebaseDatabase.getInstance().getReference();
-        User customer = new Customer(email, name, surname);
-        mDatabase.child("customers").child(userId).setValue(customer);
     }
 
     /**

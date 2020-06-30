@@ -80,7 +80,6 @@ public class OrganizationRegisterActivity extends AbstractRegisterActivity {
                             FirebaseUser firebaseUser = mAuth.getCurrentUser();
                             String userId = firebaseUser.getUid();
 
-                            writeNewUser(email, orgName, userId); //Realtime Database
                             writeUserToFirestore(email, orgName, userId); // Firestore
                             Log.d(TAG, "createUserWithEmail:success");
                             dismissLoading();
@@ -93,17 +92,6 @@ public class OrganizationRegisterActivity extends AbstractRegisterActivity {
                         }
                     }
                 });
-    }
-
-    /**
-     * Write the new user to the real time database of Firebase
-     * @param email
-     * @param orgName
-     */
-    private void writeNewUser(String email, String orgName, String userId) {
-        mDatabase = FirebaseDatabase.getInstance().getReference();
-        User organization = new Organization(email, orgName);
-        mDatabase.child("organizations").child(userId).setValue(organization);
     }
 
     /**
