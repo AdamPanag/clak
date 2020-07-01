@@ -28,6 +28,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".CustomerMainActivity" />
+        <activity android:name=".AddClientActivity"
+            android:theme="@style/AppTheme.ClakCodeOrgTheme" />
+        <activity android:name=".SendClakActivity"
+            android:theme="@style/AppTheme.ClakCodeCustTheme" />
     </application>
 
 </manifest>

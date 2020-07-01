@@ -76,20 +76,32 @@
         app:layout_constraintVertical_bias="0.94" />
 
     <Button
+        android:id="@+id/my_clients_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/connect_btn_background"
+        android:paddingHorizontal="10dp"
+        android:text="@string/my_clients"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/email"
+        app:layout_constraintVertical_bias="0.1" />
+
+    <Button
         android:id="@+id/addNewClientButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
         android:background="@drawable/connect_btn_background"
         android:drawableLeft="@drawable/ic_connect_clak"
         android:paddingHorizontal="10dp"
         android:text="Add new Client"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.94" />
+        app:layout_constraintTop_toBottomOf="@+id/my_clients_btn"
+        app:layout_constraintVertical_bias="0.093" />
 
     <GridLayout
         android:id="@+id/gridLayout"
@@ -129,17 +141,5 @@
 
     </GridLayout>
 
-    <Button
-        android:id="@+id/my_clients_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@color/colorAccent"
-        android:paddingHorizontal="10dp"
-        android:text="@string/my_clients"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/email"
-        app:layout_constraintVertical_bias="0.1" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

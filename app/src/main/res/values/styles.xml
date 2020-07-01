@@ -17,5 +17,14 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="AppTheme.ClakCodeOrgTheme">
+        <item name="pinViewStyle">@style/PinWidget.PinView</item>>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowCloseOnTouchOutside">true</item>
+    </style>
+    <style name="AppTheme.ClakCodeCustTheme">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowCloseOnTouchOutside">true</item>
+    </style>
 
 </resources>
