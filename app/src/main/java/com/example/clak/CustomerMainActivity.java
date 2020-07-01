@@ -39,6 +39,7 @@ public class CustomerMainActivity extends AppCompatActivity {
     private TextView name;
     private TextView surname;
     private Button myConnectionsBtn;
+    private Button sendClak;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,11 +108,19 @@ public class CustomerMainActivity extends AppCompatActivity {
         name = (TextView) findViewById(R.id.name);
         surname = (TextView) findViewById(R.id.surname);
         myConnectionsBtn = (Button) findViewById(R.id.myConnectionsBtn);
+        sendClak = (Button) findViewById(R.id.sendClakButton);
+
 
         myConnectionsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 goToMyConnections();
+            }
+        });
+        sendClak.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(CustomerMainActivity.this, SendClakActivity.class));
             }
         });
     }

@@ -42,6 +42,7 @@ public class OrganizationMainActivity extends AppCompatActivity {
 
     private Button logout;
     private Button myClientsBtn;
+    private Button addNewClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,6 +116,7 @@ public class OrganizationMainActivity extends AppCompatActivity {
 
         logout = (Button) findViewById(R.id.logout);
         myClientsBtn = (Button) findViewById(R.id.my_clients_btn);
+        addNewClient = (Button) findViewById(R.id.addNewClientButton);
 
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -126,6 +128,13 @@ public class OrganizationMainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 showMyClients();
+            }
+        });
+
+        addNewClient.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(OrganizationMainActivity.this, AddClientActivity.class));
             }
         });
 
