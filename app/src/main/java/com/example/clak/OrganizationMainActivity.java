@@ -15,7 +15,6 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -164,6 +163,6 @@ public class OrganizationMainActivity extends AppCompatActivity {
     }
 
     private void showMyClients() {
-        startActivity(new Intent(this, MyCustomersActivity.class));
+        startActivity(new Intent(this, MyClientsActivity.class));
     }
 }

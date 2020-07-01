@@ -2,12 +2,17 @@ package com.example.clak;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.paging.PagedList;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -32,9 +37,12 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.List;
 
-public class MyCustomersActivity extends AppCompatActivity {
+import static android.widget.Toast.makeText;
+
+public class MyClientsActivity extends AppCompatActivity {
 
     private final static String TAG = "_MyClients_";
+    private Toolbar toolbar;
 
     private DocumentReference current_org_ref;
     private String organization_id;
@@ -42,8 +50,32 @@ public class MyCustomersActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_my_customers);
+        setContentView(R.layout.activity_my_clients);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle("My Clients");
+        setSupportActionBar(toolbar);
         fetchCustomers();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.customer_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.logout_toolbar:
+                logoutUser();
+
+            default:
+                // If we got here, the user's action was not recognized.
+                // Invoke the superclass to handle it.
+                return super.onOptionsItemSelected(item);
+
+        }
     }
 
     private void fetchCustomers() {
@@ -59,10 +91,10 @@ public class MyCustomersActivity extends AppCompatActivity {
                         List<String> customer_uids = (List<String>) doc.getData().get("clients");
                         populateList(customer_uids);
                     } else {
-                        Toast.makeText(MyCustomersActivity.this, R.string.error_fetch, Toast.LENGTH_LONG).show();
+                        Toast.makeText(MyClientsActivity.this, R.string.error_fetch, Toast.LENGTH_LONG).show();
                     }
                 } else {
-                    Toast.makeText(MyCustomersActivity.this, R.string.error_fetch, Toast.LENGTH_LONG).show();
+                    Toast.makeText(MyClientsActivity.this, R.string.error_fetch, Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -176,5 +208,11 @@ public class MyCustomersActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter.startListening();
+    }
+
+    private void logoutUser() {
+        startActivity(new Intent(MyClientsActivity.this, LoginActivity.class));
+        FirebaseAuth.getInstance().signOut();
+        makeText(MyClientsActivity.this, R.string.see_you_soon, Toast.LENGTH_SHORT).show();
     }
 }
