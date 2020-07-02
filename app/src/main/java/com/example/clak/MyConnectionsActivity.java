@@ -3,18 +3,38 @@ package com.example.clak;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.paging.PagedList;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.clak.classes.Organization;
+import com.firebase.ui.firestore.SnapshotParser;
+import com.firebase.ui.firestore.paging.FirestorePagingAdapter;
+import com.firebase.ui.firestore.paging.FirestorePagingOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldPath;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+
+import java.util.List;
 
 import static android.widget.Toast.makeText;
 
@@ -27,6 +47,9 @@ public class MyConnectionsActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
+    private FirebaseUser user;
+    private DocumentReference current_customer_ref;
+    private String customer_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,9 +58,9 @@ public class MyConnectionsActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("My Connections");
         setSupportActionBar(toolbar);
-        dataList = findViewById(R.id.dataList);
+        dataList = findViewById(R.id.organizations_recycler);
 
-        initFirebaseAuth();
+        fetchOrganizations();
     }
 
     @Override
@@ -61,24 +84,92 @@ public class MyConnectionsActivity extends AppCompatActivity {
         }
     }
 
-    private void initFirebaseAuth() {
-        mAuth = FirebaseAuth.getInstance();
-        mAuthListener = new FirebaseAuth.AuthStateListener() {
+    private void fetchOrganizations() {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        customer_id = user.getUid();
+        current_customer_ref = FirebaseFirestore.getInstance().collection("customers").document(customer_id);
+        current_customer_ref.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser user = firebaseAuth.getCurrentUser();
-                if (user != null) {
-                    Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
-                    updateUI();
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot doc = task.getResult();
+                    if (doc.exists()) {
+                        List<String> organizations_uids = (List<String>) doc.getData().get("customer_organizations");
+                        populateList(organizations_uids);
+                    } else {
+                        Toast.makeText(MyConnectionsActivity.this, R.string.error_fetch, Toast.LENGTH_LONG).show();
+                    }
                 } else {
-                    Log.d(TAG, "onAuthStateChanged:signed_out");
+                    Toast.makeText(MyConnectionsActivity.this, R.string.error_fetch, Toast.LENGTH_LONG).show();
                 }
             }
-        };
+        });
+
     }
 
-    private void updateUI() {
+    private void populateList(final List<String> organizations_uids) {
+        if (organizations_uids.size() == 0) {
+            // Handle case where the customer has no connections
+            Toast.makeText(this, "No connected organizations", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
+        Query query = FirebaseFirestore.getInstance()
+                .collection("organizations")
+                .whereIn(FieldPath.documentId(), organizations_uids);
+
+        PagedList.Config config = new PagedList.Config.Builder()
+                .setEnablePlaceholders(false)
+                .setPrefetchDistance(10)
+                .setPageSize(20)
+                .build();
+
+        FirestorePagingOptions<Organization> options = new FirestorePagingOptions.Builder<Organization>()
+                .setQuery(query, config, new SnapshotParser<Organization>() {
+                    @NonNull
+                    @Override
+                    public Organization parseSnapshot(@NonNull DocumentSnapshot snapshot) {
+                        return new Organization(snapshot.getId(), snapshot.getString("email"),
+                                snapshot.getString("orgName"));
+                    }
+                })
+                .build();
+
+        class OrganizationViewHolder extends RecyclerView.ViewHolder {
+
+            TextView orgName;
+
+            public OrganizationViewHolder(@NonNull View itemView) {
+                super(itemView);
+                orgName = itemView.findViewById(R.id.orgName);
+
+            }
+        }
+
+        final FirestorePagingAdapter<Organization, OrganizationViewHolder> adapter =
+                new FirestorePagingAdapter<Organization, OrganizationViewHolder>(options) {
+                    @NonNull
+                    @Override
+                    public OrganizationViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.my_connections_grid_layout, parent, false);
+                        OrganizationViewHolder holder = new OrganizationViewHolder(view);
+                        return holder;
+                    }
+
+                    @Override
+                    protected void onBindViewHolder(@NonNull final OrganizationViewHolder holder,
+                                                    final int position,
+                                                    @NonNull final Organization model) {
+                        holder.orgName.setText(model.getOrgName());
+
+                    }
+                };
+
+        RecyclerView recyclerView = findViewById(R.id.organizations_recycler);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2,GridLayoutManager.VERTICAL,false);
+        recyclerView.setLayoutManager(gridLayoutManager);
+        recyclerView.setAdapter(adapter);
+        adapter.startListening();
     }
 
     private void logoutUser() {
@@ -87,7 +178,4 @@ public class MyConnectionsActivity extends AppCompatActivity {
         makeText(MyConnectionsActivity.this, R.string.see_you_soon, Toast.LENGTH_SHORT).show();
     }
 
-    private void populateList() {
-
-    }
 }
