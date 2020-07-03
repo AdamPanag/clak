@@ -94,7 +94,7 @@ public class MyConnectionsActivity extends AppCompatActivity {
                 if (task.isSuccessful()) {
                     DocumentSnapshot doc = task.getResult();
                     if (doc.exists()) {
-                        List<String> organizations_uids = (List<String>) doc.getData().get("customer_organizations");
+                        List<String> organizations_uids = (List<String>) doc.getData().get("connections");
                         populateList(organizations_uids);
                     } else {
                         Toast.makeText(MyConnectionsActivity.this, R.string.error_fetch, Toast.LENGTH_LONG).show();

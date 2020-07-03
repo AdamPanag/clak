@@ -20,6 +20,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -106,6 +107,8 @@ public class CustomerRegisterActivity extends AbstractRegisterActivity {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         Map<String, Object> user = new HashMap<>();
+        ArrayList<String> connections = new ArrayList<String>();
+        user.put("connections", connections);
         user.put("email", email);
         user.put("name", name);
         user.put("surname", surname);

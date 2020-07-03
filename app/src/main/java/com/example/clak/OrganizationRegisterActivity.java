@@ -26,6 +26,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.DocumentReference;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -103,6 +104,8 @@ public class OrganizationRegisterActivity extends AbstractRegisterActivity {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         Map<String, Object> user = new HashMap<>();
+        ArrayList<String> clients = new ArrayList<String>();
+        user.put("clients", clients);
         user.put("email", email);
         user.put("orgName", orgName);
 

@@ -1,6 +1,7 @@
 package com.example.clak;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -109,7 +110,6 @@ public class CustomerMainActivity extends AppCompatActivity {
         surname = (TextView) findViewById(R.id.surname);
         myConnectionsBtn = (Button) findViewById(R.id.myConnectionsBtn);
         sendClak = (Button) findViewById(R.id.sendClakButton);
-
 
         myConnectionsBtn.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -114,7 +114,7 @@ public class AddClientActivity extends Activity {
         orgRef.update("clients", FieldValue.arrayUnion(cid));
 
         DocumentReference cusRef = db.collection("customers").document(cid);
-        cusRef.update("customer_organizations", FieldValue.arrayUnion(user.getUid()));
+        cusRef.update("connections", FieldValue.arrayUnion(user.getUid()));
 
 
     }
