@@ -109,8 +109,14 @@ public class AddClientActivity extends Activity {
     public void writeToFirestore(String cid) {
         FirebaseUser user = mAuth.getCurrentUser();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
+
         DocumentReference orgRef = db.collection("organizations").document(user.getUid());
         orgRef.update("clients", FieldValue.arrayUnion(cid));
+
+        DocumentReference cusRef = db.collection("customers").document(cid);
+        cusRef.update("customer_organizations", FieldValue.arrayUnion(user.getUid()));
+
+
     }
 
     public void deleteFromRealtime(String cid) {
@@ -139,7 +145,7 @@ public class AddClientActivity extends Activity {
         int width = dm.widthPixels;
         int height = dm.heightPixels;
 
-        getWindow().setLayout((int)(width*.7), (int)(height*.6));
+        getWindow().setLayout((int)(width*.7), (int)(height*.5));
     }
 }
 
