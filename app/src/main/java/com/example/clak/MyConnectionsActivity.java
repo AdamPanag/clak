@@ -33,7 +33,9 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldPath;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static android.widget.Toast.makeText;
@@ -87,18 +89,20 @@ public class MyConnectionsActivity extends AppCompatActivity {
     private void fetchOrganizations() {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         customer_id = user.getUid();
-        current_customer_ref = FirebaseFirestore.getInstance().collection("customers").document(customer_id);
-        current_customer_ref.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+        FirebaseFirestore.getInstance()
+                .collection("connections")
+                .whereEqualTo("customer_id", user.getUid())
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
-                    DocumentSnapshot doc = task.getResult();
-                    if (doc.exists()) {
-                        List<String> organizations_uids = (List<String>) doc.getData().get("connections");
-                        populateList(organizations_uids);
-                    } else {
-                        Toast.makeText(MyConnectionsActivity.this, R.string.error_fetch, Toast.LENGTH_LONG).show();
+                    QuerySnapshot qs = task.getResult();
+                    List<String> organizations_uids = new ArrayList<String>();
+                    List<DocumentSnapshot> docs = qs.getDocuments();
+                    for (DocumentSnapshot doc : docs) {
+                        organizations_uids.add(doc.getString("organization_id"));
                     }
+                    populateList(organizations_uids);
                 } else {
                     Toast.makeText(MyConnectionsActivity.this, R.string.error_fetch, Toast.LENGTH_LONG).show();
                 }

@@ -27,7 +27,9 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class AddClientActivity extends Activity {
 
@@ -110,12 +112,10 @@ public class AddClientActivity extends Activity {
         FirebaseUser user = mAuth.getCurrentUser();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-        DocumentReference orgRef = db.collection("organizations").document(user.getUid());
-        orgRef.update("clients", FieldValue.arrayUnion(cid));
-
-        DocumentReference cusRef = db.collection("customers").document(cid);
-        cusRef.update("connections", FieldValue.arrayUnion(user.getUid()));
-
+        Map<String, String> connection = new HashMap<>();
+        connection.put("customer_id", cid);
+        connection.put("organization_id", user.getUid());
+        db.collection("connections").add(connection);
 
     }
 

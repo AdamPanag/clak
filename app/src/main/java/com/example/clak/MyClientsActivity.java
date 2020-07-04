@@ -27,6 +27,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldPath;
@@ -35,6 +36,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static android.widget.Toast.makeText;
@@ -44,7 +46,6 @@ public class MyClientsActivity extends AppCompatActivity {
     private final static String TAG = "_MyClients_";
     private Toolbar toolbar;
 
-    private DocumentReference current_org_ref;
     private String organization_id;
 
     @Override
@@ -54,6 +55,8 @@ public class MyClientsActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("My Clients");
         setSupportActionBar(toolbar);
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        organization_id = user.getUid();
         fetchCustomers();
     }
 
@@ -79,20 +82,20 @@ public class MyClientsActivity extends AppCompatActivity {
     }
 
     private void fetchCustomers() {
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        organization_id = user.getUid();
-        current_org_ref = FirebaseFirestore.getInstance().collection("organizations").document(organization_id);
-        current_org_ref.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+        FirebaseFirestore.getInstance()
+                .collection("connections")
+                .whereEqualTo("organization_id", organization_id)
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
-                    DocumentSnapshot doc = task.getResult();
-                    if (doc.exists()) {
-                        List<String> customer_uids = (List<String>) doc.getData().get("clients");
-                        populateList(customer_uids);
-                    } else {
-                        Toast.makeText(MyClientsActivity.this, R.string.error_fetch, Toast.LENGTH_LONG).show();
+                    QuerySnapshot qs = task.getResult();
+                    List<String> customer_uids = new ArrayList<String>();
+                    List<DocumentSnapshot> docs = qs.getDocuments();
+                    for (DocumentSnapshot doc : docs) {
+                        customer_uids.add(doc.getString("customer_id"));
                     }
+                    populateList(customer_uids);
                 } else {
                     Toast.makeText(MyClientsActivity.this, R.string.error_fetch, Toast.LENGTH_LONG).show();
                 }
@@ -168,19 +171,33 @@ public class MyClientsActivity extends AppCompatActivity {
                             public void onClick(View v) {
                                 holder.remove_btn.setOnClickListener(null); // Prevent more clicks
                                 holder.remove_btn.setText(R.string.deleting);
-                                current_org_ref.update("clients", FieldValue.arrayRemove(customer_uids.get(position)))
-                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                            @Override
-                                            public void onComplete(@NonNull Task<Void> task) {
-                                                if (task.isSuccessful()) {
-                                                    holder.remove_btn.setText(R.string.deleted);
-                                                    holder.remove_btn.setBackgroundColor(getResources().getColor(R.color.green));
-                                                } else {
-                                                    holder.remove_btn.setText(R.string.error);
-                                                    holder.remove_btn.setBackgroundColor(getResources().getColor(R.color.red));
-                                                }
+                                final CollectionReference connectionRef = FirebaseFirestore.getInstance().collection("connections");
+                                connectionRef
+                                        .whereEqualTo("customer_id", model.getId())
+                                        .whereEqualTo("organization_id", organization_id)
+                                        .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                        if (task.isSuccessful()) {
+                                            for (DocumentSnapshot document : task.getResult()) {
+                                                connectionRef.document(document.getId()).delete()
+                                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                            @Override
+                                                            public void onComplete(@NonNull Task<Void> task) {
+                                                                if (task.isSuccessful()) {
+                                                                    holder.remove_btn.setText(R.string.deleted);
+                                                                    holder.remove_btn.setBackgroundColor(getResources().getColor(R.color.green));
+                                                                } else {
+                                                                    holder.remove_btn.setText(R.string.error);
+                                                                    holder.remove_btn.setBackgroundColor(getResources().getColor(R.color.red));
+                                                                }
+                                                            }
+                                                        });
                                             }
-                                        });
+                                        }
+                                    }
+                                });
+
                             }
                         });
 
