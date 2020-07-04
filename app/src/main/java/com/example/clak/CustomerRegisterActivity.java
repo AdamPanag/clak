@@ -107,8 +107,6 @@ public class CustomerRegisterActivity extends AbstractRegisterActivity {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         Map<String, Object> user = new HashMap<>();
-        ArrayList<String> connections = new ArrayList<String>();
-        user.put("connections", connections);
         user.put("email", email);
         user.put("name", name);
         user.put("surname", surname);
