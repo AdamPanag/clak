@@ -11,7 +11,10 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.clak.classes.OTP;
+import com.example.clak.classes.otp.OTPFactory;
+import com.example.clak.classes.otp.OneTimePassword;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -20,15 +23,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import androidx.annotation.NonNull;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class AddClientActivity extends Activity {
@@ -37,7 +36,6 @@ public class AddClientActivity extends Activity {
     private FirebaseAuth mAuth;
 
     DatabaseReference databaseOTP;
-    private List<OTP> otpList;
     private TextView code;
     private Button verify;
 
@@ -69,7 +67,6 @@ public class AddClientActivity extends Activity {
     private void initUIComponents() {
         verify = (Button) findViewById(R.id.verify);
         code = (TextView) findViewById(R.id.firstPinView);
-        otpList = new ArrayList<>();
 
         verify.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,41 +78,37 @@ public class AddClientActivity extends Activity {
 
     public void verifyCode(){
 
-
-        databaseOTP.addValueEventListener(new ValueEventListener() {
+        OTPFactory.getByCode(code.getText().toString()).addOnCompleteListener(new OnCompleteListener<OneTimePassword>() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                otpList.clear();
-
-                //otpSS stands for otpSnapShot
-                for(DataSnapshot otpSS : dataSnapshot.getChildren()){
-                    OTP otp = otpSS.getValue(OTP.class);
-                        otpCid = otp.getCid();
-                        otpCode = otp.getCode();
-
-                        if(code.getText().toString().equals(String.valueOf(otpCode))){
-                            bountiedCid = otp.getCid();
-                            bountiedCode = otp.getCode();
-                            writeToFirestore(bountiedCid);
-                            deleteFromRealtime(bountiedCid);
+            public void onComplete(@NonNull Task<OneTimePassword> task) {
+                if (task.isSuccessful()) {
+                    final OneTimePassword otp = task.getResult();
+                    Toast.makeText(AddClientActivity.this, "Success", Toast.LENGTH_SHORT).show();
+                    writeToFirestore(otp.getCid()).addOnCompleteListener(new OnCompleteListener() {
+                        @Override
+                        public void onComplete(@NonNull Task task) {
+                            if (task.isSuccessful()) {
+                                otp.remove();
+                            } else {
+                                Toast.makeText(AddClientActivity.this, "Could not add customer", Toast.LENGTH_SHORT).show();
+                            }
                         }
+                    });
+                } else {
+                    Toast.makeText(AddClientActivity.this, "Failure", Toast.LENGTH_SHORT).show();
                 }
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                Log.w(TAG, "find id:onCancelled", databaseError.toException());
             }
         });
     }
 
-    public void writeToFirestore(String cid) {
+    public Task writeToFirestore(String cid) {
         FirebaseUser user = mAuth.getCurrentUser();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         Map<String, String> connection = new HashMap<>();
         connection.put("customer_id", cid);
         connection.put("organization_id", user.getUid());
-        db.collection("connections").add(connection);
+        return db.collection("connections").add(connection);
 
     }
 
