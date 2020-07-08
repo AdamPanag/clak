@@ -45,6 +45,7 @@
                 android:text="@string/organization_name"
                 android:textColor="@color/black"
                 android:textSize="@dimen/textSubtitle"
+                android:maxHeight="25dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintStart_toStartOf="parent"

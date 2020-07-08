@@ -86,6 +86,7 @@ public abstract class AbstractRegisterActivity extends AppCompatActivity {
         ok = !isFieldEmpty(password2) && ok;
         ok = !isFieldEmpty(password) && ok;
         ok = !isFieldEmpty(email) && ok;
+
         if (!ok)
             return false;
 
