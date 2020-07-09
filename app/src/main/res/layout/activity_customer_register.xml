@@ -167,10 +167,11 @@
         android:layout_height="wrap_content"
         android:text="@string/sign_up"
         android:visibility="visible"
+        android:background="@drawable/connect_btn_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/passwordInput2"
-        app:layout_constraintVertical_bias="0.05" />
+        app:layout_constraintVertical_bias="0.1" />
     
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -14,15 +14,23 @@
     tools:context=".LoginActivity">
 
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_marginTop="30dp"
+        android:src="@drawable/ic_home" />
+
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="30dp"
         android:baselineAligned="false"
         android:text="Welcome"
         android:textColor="#000000"
         android:textSize="30sp"
+        android:textStyle="bold"
         android:visibility="visible" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -44,6 +52,7 @@
             android:enabled="true"
             android:padding="5dp"
             android:text="@string/login_continue"
+            android:textStyle="bold"
             android:textColor="#FFFFFF"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -56,6 +65,7 @@
             android:background="@drawable/signup_button"
             android:text="@string/sign_up"
             android:textColor="#FFFFFF"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -93,8 +103,9 @@
         android:layout_height="50dp"
         android:background="#0BF8FC"
         android:shadowRadius="@android:integer/config_longAnimTime"
-        android:text="Sign in"
+        android:text="@string/login_continue"
         android:textColor="@color/white"
+        android:textStyle="bold"
         android:visibility="gone" />
 
 
