@@ -11,6 +11,10 @@
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
         android:elevation="4dp"
+        app:title="Clak"
+        app:titleTextColor="@color/white"
+        app:subtitle="Profile"
+        app:subtitleTextColor="@color/white"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
 
@@ -71,6 +75,7 @@
             android:background="@drawable/connect_btn_background"
             android:paddingHorizontal="10dp"
             android:text="@string/my_connections"
+            android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -84,6 +89,7 @@
             android:background="@drawable/connect_btn_background"
             android:paddingHorizontal="10dp"
             android:text="Generate password"
+            android:textColor="@color/white"
 
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/myConnectionsBtn"
@@ -99,6 +105,7 @@
             android:paddingHorizontal="10dp"
             android:background="@drawable/connect_btn_background"
             android:text="Clak"
+            android:textColor="@color/white"
             android:drawableLeft="@drawable/ic_connect_clak"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

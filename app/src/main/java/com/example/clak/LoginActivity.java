@@ -40,8 +40,12 @@ public class LoginActivity extends AppCompatActivity {
     private DatabaseReference mDatabase;
 
     private Button loginButton;
-    private Button signUpButton;
+    private Button showSignUpButton;
     private Button showLoginButton;
+
+    private Button signUpAsCustomerBtn;
+    private Button signUpAsOrganizationBtn;
+
     private TextInputLayout email;
     private TextInputLayout password;
 
@@ -65,25 +69,27 @@ public class LoginActivity extends AppCompatActivity {
 
     private void initUIComponents() {
         loginButton = (Button) findViewById(R.id.loginButton);
-        signUpButton = (Button) findViewById(R.id.signUpButton);
+        showSignUpButton = (Button) findViewById(R.id.showSignUpButton);
         showLoginButton = (Button) findViewById(R.id.showLoginButton);
+        signUpAsCustomerBtn = (Button) findViewById(R.id.signUpAsCustomerBtn);
+        signUpAsOrganizationBtn = (Button) findViewById(R.id.signUpAsOrganizationBtn);
         email = (TextInputLayout) findViewById(R.id.emailInput);
         password = (TextInputLayout) findViewById(R.id.passwordInput);
 
         showLoginButton.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
-               if (email.getVisibility() != View.VISIBLE) {
-                   email.setVisibility(View.VISIBLE);
-                   password.setVisibility(View.VISIBLE);
-                   loginButton.setVisibility(View.VISIBLE);
-               } else {
-                   email.setVisibility(View.GONE);
-                   password.setVisibility(View.GONE);
-                   loginButton.setVisibility(View.GONE);
-               }
+               set_visibility(true);
            }
         });
+
+        showSignUpButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                set_visibility(false);
+            }
+        });
+
         loginButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -98,13 +104,67 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        signUpButton.setOnClickListener(new View.OnClickListener() {
+        signUpAsCustomerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                goToRegisterActivity();
+                startActivity(new Intent(LoginActivity.this, CustomerRegisterActivity.class));
             }
+
+        });
+
+        signUpAsOrganizationBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LoginActivity.this, OrganizationRegisterActivity.class));
+            }
+
         });
     }
+
+    public void set_visibility(boolean loginFields){
+        if (loginFields) {
+
+            if (email.getVisibility() != View.VISIBLE) {
+                if(signUpAsCustomerBtn.getVisibility() == View.VISIBLE) setSignUpVisibility();
+                setLoginVisibility();
+            } else {
+                setLoginVisibility();
+            }
+
+        } else {
+
+            if(signUpAsCustomerBtn.getVisibility() != View.VISIBLE) {
+
+                if (email.getVisibility() == View.VISIBLE) setLoginVisibility();
+                setSignUpVisibility();
+            } else {
+                setSignUpVisibility();
+            }
+        }
+    }
+
+    public void setLoginVisibility() {
+        if (email.getVisibility() != View.VISIBLE) {
+            email.setVisibility(View.VISIBLE);
+            password.setVisibility(View.VISIBLE);
+            loginButton.setVisibility(View.VISIBLE);
+        } else {
+            email.setVisibility(View.GONE);
+            password.setVisibility(View.GONE);
+            loginButton.setVisibility(View.GONE);
+        }
+    }
+
+    public void setSignUpVisibility() {
+        if(signUpAsCustomerBtn.getVisibility() == View.VISIBLE) {
+            signUpAsCustomerBtn.setVisibility(View.GONE);
+            signUpAsOrganizationBtn.setVisibility(View.GONE);
+        } else {
+            signUpAsCustomerBtn.setVisibility(View.VISIBLE);
+            signUpAsOrganizationBtn.setVisibility(View.VISIBLE);
+        }
+    }
+
 
     private void loginUser(String email, String password) {
         mAuth.signInWithEmailAndPassword(email, password)
@@ -170,10 +230,6 @@ public class LoginActivity extends AppCompatActivity {
     public void goToOrganizationMainActivity() {
         startActivity(new Intent(this, OrganizationMainActivity.class));
         finish();
-    }
-
-    private void goToRegisterActivity() {
-        startActivity(new Intent(this, RegisterActivity.class));
     }
 
     private void showLoading() {

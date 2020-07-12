@@ -4,7 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/org_form"
     tools:context=".CustomerRegisterActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        app:title="Clak"
+        app:titleTextColor="@color/white"
+        app:subtitle="Sign up as Customer"
+        app:subtitleTextColor="@color/white"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:layout_constraintTop_toTopOf="parent"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
     <!--Here begins the fields of customers-->
     <TextView
@@ -166,6 +180,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/sign_up"
+        android:textColor="@color/white"
         android:visibility="visible"
         android:background="@drawable/connect_btn_background"
         app:layout_constraintBottom_toBottomOf="parent"

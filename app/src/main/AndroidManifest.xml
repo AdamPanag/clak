@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".MyClientsActivity"></activity>
+        <activity android:name=".MyClientsActivity"/>
         <activity android:name=".MyConnectionsActivity" />
         <activity
             android:name=".OrganizationMainActivity"
@@ -32,6 +32,10 @@
             android:theme="@style/AppTheme.ClakCodeOrgTheme" />
         <activity android:name=".SendClakActivity"
             android:theme="@style/AppTheme.ClakCodeCustTheme" />
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>
