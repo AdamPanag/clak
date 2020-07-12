@@ -93,7 +93,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/connect_btn_background"
-        android:drawableLeft="@drawable/ic_connect_clak"
+        android:drawableLeft="@drawable/ic_add"
         android:paddingHorizontal="10dp"
         android:text="Add new Client"
 
@@ -102,44 +102,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/my_clients_btn"
         app:layout_constraintVertical_bias="0.093" />
-
-    <GridLayout
-        android:id="@+id/gridLayout"
-        android:layout_width="match_parent"
-        android:layout_height="65dp"
-        android:columnCount="2"
-        android:padding="10dp"
-
-        android:rowCount="1"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_weight="8"
-        app:layout_constraintTop_toBottomOf="@+id/name"
-        app:layout_constraintVertical_bias="1.0">
-
-        <!-- Row 1 -->
-        <Button
-            android:id="@+id/logout"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_rowWeight="0.2"
-            android:layout_columnWeight="0.3"
-            android:background="@drawable/logout_corners"
-            android:text="@string/log_out"
-            android:textColor="@color/white" />
-
-        <Button
-            android:id="@+id/settings"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_rowWeight="0.2"
-            android:layout_columnWeight="0.7"
-            android:background="@drawable/settings_corners"
-
-            android:text="Settings"
-            android:textColor="@color/blue_with_opacity" />
-
-    </GridLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

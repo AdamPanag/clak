@@ -29,7 +29,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView"
+            app:layout_constraintTop_toBottomOf="@+id/profileImage"
             app:layout_constraintVertical_bias="0.05">
 
             <TextView
@@ -40,6 +40,18 @@
                 android:text="Name"
                 android:textColor="@color/black"
                 android:textSize="@dimen/textExtra" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tableRow"
+            app:layout_constraintVertical_bias="0.0">
 
             <TextView
                 android:id="@+id/surname"
@@ -56,13 +68,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@color/colorAccent"
+            android:background="@drawable/connect_btn_background"
             android:paddingHorizontal="10dp"
             android:text="@string/my_connections"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tableRow"
+            app:layout_constraintTop_toBottomOf="@+id/tableRow2"
             app:layout_constraintVertical_bias="0.1" />
 
         <Button
@@ -96,7 +108,7 @@
             app:layout_constraintVertical_bias="0.94" />
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/profileImage"
             android:layout_width="@dimen/avatar_size"
             android:layout_height="@dimen/avatar_size"
             android:layout_gravity="center"

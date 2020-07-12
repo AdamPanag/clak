@@ -38,7 +38,7 @@
             android:layout_margin="10dp"
             android:text="@string/name"
             android:textColor="#000000"
-            android:textSize="@dimen/textLarge"
+            android:textSize="@dimen/textSubtitle"
             android:textStyle="bold" />
 
         <TextView

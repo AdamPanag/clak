@@ -30,7 +30,6 @@ import static android.widget.Toast.makeText;
 public class OrganizationMainActivity extends AppCompatActivity {
 
     private final static String TAG = "_MAIN_";
-    private static final int RC_SIGN_IN = 9001;
 
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
@@ -40,7 +39,6 @@ public class OrganizationMainActivity extends AppCompatActivity {
     private TextView name;
     private TextView email;
 
-    private Button logout;
     private Button myClientsBtn;
     private Button addNewClient;
 
@@ -114,16 +112,9 @@ public class OrganizationMainActivity extends AppCompatActivity {
         name = (TextView) findViewById(R.id.name);
         email = (TextView) findViewById(R.id.email);
 
-        logout = (Button) findViewById(R.id.logout);
         myClientsBtn = (Button) findViewById(R.id.my_clients_btn);
         addNewClient = (Button) findViewById(R.id.addNewClientButton);
 
-        logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                logoutUser();
-            }
-        });
         myClientsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
