@@ -130,7 +130,7 @@ public class CustomerMainActivity extends AppCompatActivity {
         clakButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                readQrCode();
+                startActivity(new Intent(CustomerMainActivity.this, QrCodeShowActivity.class));
             }
         });
     }
@@ -168,24 +168,5 @@ public class CustomerMainActivity extends AppCompatActivity {
 
     private void goToMyConnections() {
         startActivity(new Intent(CustomerMainActivity.this, MyConnectionsActivity.class));
-    }
-
-    private void readQrCode() {
-        startActivity(new Intent(CustomerMainActivity.this, QrScanActivity.class));
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 0) {
-
-            if (resultCode == RESULT_OK) {
-                String contents = data.getStringExtra("SCAN_RESULT");
-                Toast.makeText(getApplicationContext(), contents, Toast.LENGTH_SHORT);
-            }
-            if(resultCode == RESULT_CANCELED){
-                //handle cancel
-            }
-        }
     }
 }

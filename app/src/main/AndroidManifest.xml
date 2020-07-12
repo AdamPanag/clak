@@ -3,7 +3,10 @@
     package="com.example.clak">
 
     <uses-feature android:name="android.hardware.camera" />
+
     <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
         android:allowBackup="true"
@@ -12,12 +15,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
+        <activity android:name=".QrCodeShowActivity"></activity>
+
         <meta-data
             android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version" /> <!--version-->
+            android:value="@integer/google_play_services_version" /> <!-- version -->
         <meta-data
             android:name="com.google.android.gms.vision.DEPENDENCIES"
-            android:value="barcode" /> <!--barcode,face,ocr-->
+            android:value="barcode" /> <!-- barcode,face,ocr -->
         <activity android:name=".QrScanActivity" />
         <activity android:name=".MyClientsActivity" />
         <activity android:name=".MyConnectionsActivity" />

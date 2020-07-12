@@ -47,6 +47,9 @@ dependencies {
     implementation 'androidx.navigation:navigation-ui:2.1.0'
     implementation 'android.arch.paging:runtime:1.0.1'
 
+    implementation 'com.journeyapps:zxing-android-embedded:3.0.2@aar'
+    implementation 'com.google.zxing:core:3.4.0'
+
     implementation 'com.chaos.view:pinview:1.4.2'
 
     implementation 'com.google.android.gms:play-services-vision:20.1.0'

@@ -16,19 +16,19 @@ import java.util.Random;
 public class FirebaseOneTimePassword implements OneTimePassword {
 
     private String code;
-    private String cid;
+    private String uid;
     private OneTimePasswordType type;
     private String dbId;
 
-    public FirebaseOneTimePassword(String cid, OneTimePasswordType type) {
-        this.cid = cid;
+    public FirebaseOneTimePassword(String uid, OneTimePasswordType type) {
+        this.uid = uid;
         this.code = generateCode();
         this.type = type;
         this.dbId = null;
     }
 
-    public FirebaseOneTimePassword(String cid, OneTimePasswordType type, String code, String dbId) {
-        this.cid = cid;
+    public FirebaseOneTimePassword(String uid, OneTimePasswordType type, String code, String dbId) {
+        this.uid = uid;
         this.type = type;
         this.code = code;
         this.dbId = dbId;
@@ -39,8 +39,8 @@ public class FirebaseOneTimePassword implements OneTimePassword {
     }
 
 
-    public String getCid() {
-        return cid;
+    public String getUid() {
+        return uid;
     }
 
     @Override
@@ -48,7 +48,7 @@ public class FirebaseOneTimePassword implements OneTimePassword {
         CollectionReference databaseOTP = FirebaseFirestore.getInstance().collection("otp");
 
         Map<String, Object> map = new HashMap<String, Object>();
-        map.put("customer_id", this.cid);
+        map.put("user_id", this.uid);
         map.put("code", this.code);
         map.put("type", this.type);
         return databaseOTP.add(map);
@@ -77,7 +77,7 @@ public class FirebaseOneTimePassword implements OneTimePassword {
              @Override
              public OneTimePassword then(@NonNull Task<QuerySnapshot> task) throws Exception {
                  DocumentSnapshot doc = task.getResult().getDocuments().get(0);
-                 return new FirebaseOneTimePassword(doc.getString("customer_id"),
+                 return new FirebaseOneTimePassword(doc.getString("user_id"),
                          OneTimePasswordType.valueOf(doc.getString("type")),
                          doc.getString("code"),
                          doc.getId()

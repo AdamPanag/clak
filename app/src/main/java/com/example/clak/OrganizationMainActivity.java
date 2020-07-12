@@ -41,6 +41,7 @@ public class OrganizationMainActivity extends AppCompatActivity {
 
     private Button myClientsBtn;
     private Button addNewClient;
+    private Button clakButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -114,6 +115,7 @@ public class OrganizationMainActivity extends AppCompatActivity {
 
         myClientsBtn = (Button) findViewById(R.id.my_clients_btn);
         addNewClient = (Button) findViewById(R.id.addNewClientButton);
+        clakButton = (Button) findViewById(R.id.organizationClakButton);
 
         myClientsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -126,6 +128,13 @@ public class OrganizationMainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(OrganizationMainActivity.this, AddClientActivity.class));
+            }
+        });
+
+        clakButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(OrganizationMainActivity.this, QrScanActivity.class));
             }
         });
 

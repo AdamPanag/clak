@@ -84,7 +84,7 @@ public class AddClientActivity extends Activity {
                 if (task.isSuccessful()) {
                     final OneTimePassword otp = task.getResult();
                     Toast.makeText(AddClientActivity.this, "Success", Toast.LENGTH_SHORT).show();
-                    writeToFirestore(otp.getCid()).addOnCompleteListener(new OnCompleteListener() {
+                    writeToFirestore(otp.getUid()).addOnCompleteListener(new OnCompleteListener() {
                         @Override
                         public void onComplete(@NonNull Task task) {
                             if (task.isSuccessful()) {
