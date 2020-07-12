@@ -128,16 +128,21 @@ public class LoginActivity extends AppCompatActivity {
                 if(signUpAsCustomerBtn.getVisibility() == View.VISIBLE) setSignUpVisibility();
                 setLoginVisibility();
             } else {
+
                 setLoginVisibility();
             }
 
         } else {
 
             if(signUpAsCustomerBtn.getVisibility() != View.VISIBLE) {
-
-                if (email.getVisibility() == View.VISIBLE) setLoginVisibility();
+                email.setVisibility(View.GONE);
+                password.setVisibility(View.GONE);
+                loginButton.setVisibility(View.INVISIBLE);
                 setSignUpVisibility();
             } else {
+                email.setVisibility(View.INVISIBLE);
+                password.setVisibility(View.INVISIBLE);
+                loginButton.setVisibility(View.INVISIBLE);
                 setSignUpVisibility();
             }
         }
@@ -149,9 +154,9 @@ public class LoginActivity extends AppCompatActivity {
             password.setVisibility(View.VISIBLE);
             loginButton.setVisibility(View.VISIBLE);
         } else {
-            email.setVisibility(View.GONE);
-            password.setVisibility(View.GONE);
-            loginButton.setVisibility(View.GONE);
+            email.setVisibility(View.INVISIBLE);
+            password.setVisibility(View.INVISIBLE);
+            loginButton.setVisibility(View.INVISIBLE);
         }
     }
 
