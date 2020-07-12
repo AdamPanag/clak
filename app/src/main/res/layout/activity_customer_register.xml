@@ -6,6 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".CustomerRegisterActivity">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:layout_constraintTop_toTopOf="parent"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
     <!--Here begins the fields of customers-->
     <TextView
         android:id="@+id/nameTitle"
@@ -166,6 +176,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/sign_up"
+        android:textColor="@color/white"
         android:visibility="visible"
         android:background="@drawable/connect_btn_background"
         app:layout_constraintBottom_toBottomOf="parent"

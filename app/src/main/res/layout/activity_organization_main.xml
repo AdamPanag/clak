@@ -39,6 +39,7 @@
         android:text="@string/no_user"
         android:textColor="@color/black"
         android:textSize="25sp"
+        android:fontFamily="@font/reem_kufi"
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -52,28 +53,31 @@
         android:layout_height="wrap_content"
         android:text="@string/email_address"
         android:textSize="20sp"
+        android:fontFamily="@font/reem_kufi"
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/name"
-        app:layout_constraintVertical_bias="0.05" />
+        app:layout_constraintVertical_bias="0.051" />
 
     <Button
         android:id="@+id/connectButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:paddingHorizontal="10dp"
         android:background="@drawable/connect_btn_background"
-        android:text="Clak"
         android:drawableLeft="@drawable/ic_connect_clak"
+        android:paddingHorizontal="10dp"
+        android:text="Clak"
+        android:textColor="@color/white"
+        android:fontFamily="@font/reem_kufi"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.9"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.94" />
+        app:layout_constraintVertical_bias="0.939" />
 
     <Button
         android:id="@+id/my_clients_btn"
@@ -82,6 +86,8 @@
         android:background="@drawable/connect_btn_background"
         android:paddingHorizontal="10dp"
         android:text="@string/my_clients"
+        android:textColor="@color/white"
+        android:fontFamily="@font/reem_kufi"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -93,9 +99,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/connect_btn_background"
-        android:drawableLeft="@drawable/ic_add"
         android:paddingHorizontal="10dp"
-        android:text="Add new Client"
+        android:text="+"
+        android:textSize="30sp"
+        android:textColor="@color/white"
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
