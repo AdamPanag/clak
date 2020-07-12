@@ -232,10 +232,6 @@ public class LoginActivity extends AppCompatActivity {
         finish();
     }
 
-    private void goToRegisterActivity() {
-        startActivity(new Intent(this, RegisterActivity.class));
-    }
-
     private void showLoading() {
         if (progressDialog == null)
             progressDialog = new ProgressDialog(this);
