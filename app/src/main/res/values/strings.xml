@@ -50,4 +50,5 @@
     <string name="deleted">Deleted!</string>
     <string name="error_occured">An error occurred...</string>
     <string name="error">Error!</string>
+    <string name="startScan">Start Scanning</string>
 </resources>

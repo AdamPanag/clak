@@ -25,6 +25,22 @@
         android:focusable="true"
         android:focusableInTouchMode="true">
 
+        <Button
+            android:id="@+id/customerClakButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/connect_btn_background"
+            android:drawableLeft="@drawable/ic_connect_clak"
+            android:paddingHorizontal="10dp"
+            android:text="Clak"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.9"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.94" />
+
         <TableRow
             android:id="@+id/tableRow"
             android:layout_width="wrap_content"
@@ -113,8 +129,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.94" />
-
-        <ImageView
+    <ImageView
             android:id="@+id/profileImage"
             android:layout_width="@dimen/avatar_size"
             android:layout_height="@dimen/avatar_size"

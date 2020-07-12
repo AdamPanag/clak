@@ -2,6 +2,7 @@ package com.example.clak;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -41,6 +42,7 @@ public class CustomerMainActivity extends AppCompatActivity {
     private TextView surname;
     private Button myConnectionsBtn;
     private Button sendClak;
+    private Button clakButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,6 +112,7 @@ public class CustomerMainActivity extends AppCompatActivity {
         surname = (TextView) findViewById(R.id.surname);
         myConnectionsBtn = (Button) findViewById(R.id.myConnectionsBtn);
         sendClak = (Button) findViewById(R.id.sendClakButton);
+        clakButton = (Button) findViewById(R.id.customerClakButton);
 
         myConnectionsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -121,6 +124,13 @@ public class CustomerMainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(CustomerMainActivity.this, SendClakActivity.class));
+            }
+        });
+
+        clakButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                readQrCode();
             }
         });
     }
@@ -158,5 +168,24 @@ public class CustomerMainActivity extends AppCompatActivity {
 
     private void goToMyConnections() {
         startActivity(new Intent(CustomerMainActivity.this, MyConnectionsActivity.class));
+    }
+
+    private void readQrCode() {
+        startActivity(new Intent(CustomerMainActivity.this, QrScanActivity.class));
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 0) {
+
+            if (resultCode == RESULT_OK) {
+                String contents = data.getStringExtra("SCAN_RESULT");
+                Toast.makeText(getApplicationContext(), contents, Toast.LENGTH_SHORT);
+            }
+            if(resultCode == RESULT_CANCELED){
+                //handle cancel
+            }
+        }
     }
 }
