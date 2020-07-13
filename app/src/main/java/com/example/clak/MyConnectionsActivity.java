@@ -58,7 +58,6 @@ public class MyConnectionsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_connections);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle("My Connections");
         setSupportActionBar(toolbar);
         dataList = findViewById(R.id.organizations_recycler);
 

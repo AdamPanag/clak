@@ -53,7 +53,6 @@ public class MyClientsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_clients);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle("My Clients");
         setSupportActionBar(toolbar);
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         organization_id = user.getUid();

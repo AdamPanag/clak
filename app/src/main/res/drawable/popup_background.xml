@@ -3,11 +3,9 @@
     android:shape="rectangle"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <solid android:color="#F0E68C"/>
+    <solid android:color="@color/blue"/>
 
-    <gradient android:startColor="#E0FFFF"
-        android:endColor="#0000FF"
-        />
+
 
     <stroke android:width="4dp"
         android:color="@color/white"/>

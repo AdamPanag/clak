@@ -11,12 +11,12 @@
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
+
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".QrCodeShowActivity"
-            android:screenOrientation="portrait"/>
+        <activity android:name=".QrCodeShowActivity" />
 
         <meta-data
             android:name="com.google.android.gms.version"
@@ -24,12 +24,11 @@
         <meta-data
             android:name="com.google.android.gms.vision.DEPENDENCIES"
             android:value="barcode" /> <!-- barcode,face,ocr -->
-        <activity android:name=".QrScanActivity"
-            android:screenOrientation="portrait"/>
+        <activity android:name=".QrScanActivity" />
         <activity android:name=".MyClientsActivity"
             android:screenOrientation="portrait"/>
         <activity android:name=".MyConnectionsActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".OrganizationMainActivity"
             android:label="@string/title_activity_organization_main"
@@ -38,27 +37,26 @@
         <activity android:name=".OrganizationRegisterActivity"
             android:screenOrientation="portrait"/>
         <activity android:name=".CustomerRegisterActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".LoginActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".CustomerMainActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".AddClientActivity"
             android:theme="@style/AppTheme.ClakCodeOrgTheme"
-            android:screenOrientation="portrait" />
+             />
         <activity
             android:name=".SendClakActivity"
             android:theme="@style/AppTheme.ClakCodeCustTheme"
-            android:screenOrientation="portrait"/>
+            />
 
         <meta-data
             android:name="preloaded_fonts"

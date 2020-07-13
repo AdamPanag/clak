@@ -81,7 +81,7 @@
         app:layout_constraintHorizontal_bias="0.9"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.939" />
+        app:layout_constraintVertical_bias="0.94" />
 
     <Button
         android:id="@+id/my_clients_btn"
@@ -103,16 +103,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/connect_btn_background"
+        android:drawableLeft="@drawable/ic_add"
+        android:fontFamily="@font/reem_kufi"
         android:paddingHorizontal="10dp"
-        android:text="+"
-        android:textSize="30sp"
+        android:text="Add new Client"
         android:textColor="@color/white"
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/my_clients_btn"
-        app:layout_constraintVertical_bias="0.093" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.94" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
