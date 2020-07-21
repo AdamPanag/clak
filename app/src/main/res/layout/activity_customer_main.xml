@@ -5,6 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -18,12 +20,33 @@
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
 
+
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white"
         android:focusable="true"
         android:focusableInTouchMode="true">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_blob1_cmain"
+            app:layout_constraintBottom_toTopOf="@id/customerClakButton"
+            android:layout_marginRight="@dimen/avatar_size_half"
+            android:rotation="80"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintRight_toRightOf="parent"
+            android:background="@drawable/ic_blob2_cmain"
+            android:layout_marginLeft="@dimen/avatar_size_large"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/myConnectionsBtn" />
 
         <Button
             android:id="@+id/customerClakButton"

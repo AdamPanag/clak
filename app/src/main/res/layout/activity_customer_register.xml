@@ -7,25 +7,43 @@
     android:background="@color/white"
     tools:context=".CustomerRegisterActivity">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+    <View
+        android:id="@+id/topwave"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
-        app:title="Clak"
-        app:titleTextColor="@color/white"
-        app:subtitle="Sign up as Customer"
-        app:subtitleTextColor="@color/white"
-        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-        app:layout_constraintTop_toTopOf="parent"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+        android:layout_height="500dp"
+        android:background="@drawable/ic_wave_cre"
+        android:backgroundTint="@color/blue"
+        android:rotation="180"
+        app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/signuptext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Sign up as customer"
+        android:textColor="@color/white"
+        android:layout_marginTop="@dimen/textLarge"
+        android:textSize="@dimen/textExtra"
+        android:fontFamily="@font/schoolbell"
+        android:gravity="center_horizontal"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <View
+        android:id="@+id/botwave"
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:background="@drawable/ic_wave_cre"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="match_parent"
         android:layout_height="@dimen/avatar_size_large"
         android:src="@drawable/customer_form_up"
+        android:background="@color/transparent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -199,12 +217,12 @@
         android:layout_height="wrap_content"
         android:text="@string/sign_up"
         android:textColor="@color/white"
-        android:visibility="visible"
         android:background="@drawable/connect_btn_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/passwordInput2"
         app:layout_constraintVertical_bias="0.1" />
-    
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

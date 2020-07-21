@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:padding="16dp">
 
     <SurfaceView
         android:id="@+id/camera_view"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        android:layout_centerInParent="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_width="450dp"
+        android:layout_height="400dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="160dp"
+        android:alpha="0.5"/>
 
     <Button
         android:id="@+id/startScan"
@@ -17,9 +21,65 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/camera_view"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp"
-        android:background="@color/colorPrimary"
+        android:layout_marginTop="17dp"
+        android:background="@color/blue"
         android:padding="5dp"
         android:text="@string/startScan"
         android:textColor="@color/white" />
+
+    <TextView
+        android:id="@+id/step1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="0dp"
+        android:background="@color/gray"
+        android:fontFamily="@font/schoolbell"
+        android:gravity="center"
+        android:text="Wait for the customer, to generate his QR Code"
+        android:textColor="@color/black"
+        android:textSize="@dimen/spacingMedium" />
+
+    <TextView
+        android:id="@+id/step2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="35dp"
+        android:background="@color/gray"
+        android:fontFamily="@font/schoolbell"
+        android:gravity="center"
+        android:text="Press the 'START SCANNING' button"
+        android:textColor="@color/black"
+        android:textSize="@dimen/textLarge" />
+
+    <TextView
+        android:id="@+id/step3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="70dp"
+        android:fontFamily="@font/schoolbell"
+        android:text="Aim your camera at QR Code"
+        android:textColor="@color/black"
+        android:textSize="@dimen/textLarge"
+        android:gravity="center"
+        android:background="@color/gray"/>
+
+
+    <TextView
+        android:id="@+id/step4"
+        android:layout_width="375dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="110dp"
+        android:background="@color/gray"
+        android:fallbackLineSpacing="false"
+        android:fontFamily="@font/schoolbell"
+        android:gravity="center"
+        android:text="...and CLAK!"
+        android:textColor="@color/blue"
+        android:textSize="@dimen/textHuge" />
+
+
 </RelativeLayout>
