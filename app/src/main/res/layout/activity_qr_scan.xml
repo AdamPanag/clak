@@ -1,18 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    android:padding="16dp">
+    android:padding="8dp">
 
     <SurfaceView
         android:id="@+id/camera_view"
-        android:layout_width="450dp"
-        android:layout_height="400dp"
+        android:layout_width="359dp"
+        android:layout_height="289dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="160dp"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/step4"
+        app:layout_constraintVertical_bias="0.37" />
 
     <Button
         android:id="@+id/startScan"
@@ -20,65 +26,78 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/camera_view"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="17dp"
+        android:layout_marginTop="8dp"
         android:background="@color/blue"
         android:padding="5dp"
         android:text="@string/startScan"
-        android:textColor="@color/white" />
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/camera_view" />
 
     <TextView
         android:id="@+id/step1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="0dp"
-        android:background="@color/gray"
-        android:fontFamily="@font/schoolbell"
-        android:gravity="center"
-        android:text="Wait for the customer, to generate his QR Code"
+        android:fontFamily="@font/reem_kufi"
+        android:gravity="left"
+        android:text="1. Wait for the customer, to generate his QR Code"
         android:textColor="@color/black"
-        android:textSize="@dimen/spacingMedium" />
+        android:textSize="@dimen/textLarge"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/step2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="35dp"
-        android:background="@color/gray"
-        android:fontFamily="@font/schoolbell"
-        android:gravity="center"
-        android:text="Press the 'START SCANNING' button"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/reem_kufi"
+        android:gravity="left"
+        android:text="2. Press the 'START SCANNING' button"
         android:textColor="@color/black"
-        android:textSize="@dimen/textLarge" />
+        android:textSize="@dimen/textLarge"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/step1" />
+
 
     <TextView
         android:id="@+id/step3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="70dp"
-        android:fontFamily="@font/schoolbell"
-        android:text="Aim your camera at QR Code"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/reem_kufi"
+        android:gravity="left"
+        android:text="3. Aim your camera at QR Code"
         android:textColor="@color/black"
         android:textSize="@dimen/textLarge"
-        android:gravity="center"
-        android:background="@color/gray"/>
-
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/step2" />
 
     <TextView
         android:id="@+id/step4"
         android:layout_width="375dp"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="110dp"
-        android:background="@color/gray"
+        android:layout_marginTop="8dp"
         android:fallbackLineSpacing="false"
-        android:fontFamily="@font/schoolbell"
+        android:fontFamily="@font/reem_kufi"
         android:gravity="center"
         android:text="...and CLAK!"
         android:textColor="@color/blue"
-        android:textSize="@dimen/textHuge" />
+        android:textSize="@dimen/textLarge"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/step3" />
 
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

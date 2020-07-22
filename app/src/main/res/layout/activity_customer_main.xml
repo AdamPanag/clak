@@ -29,16 +29,36 @@
         android:focusable="true"
         android:focusableInTouchMode="true">
 
+        <View
+            android:id="@+id/redcircle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:alpha="0.9"
+            android:background="@drawable/ic_blob2"
+            android:backgroundTint="@color/zxing_viewfinder_laser"
+            android:rotationX="-10"
+            android:rotationY="-20"
+            app:layout_constraintBottom_toBottomOf="@+id/customerClakButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <View
+            android:id="@+id/yellowcircle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:alpha="0.9"
+            android:background="@drawable/ic_blob2"
+            app:layout_constraintBottom_toTopOf="@+id/customerClakButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <Button
             android:id="@+id/customerClakButton"
             android:layout_width="@dimen/avatar_size_half"
             android:layout_height="@dimen/avatar_size_half"
             android:layout_weight="1"
-            android:background="@drawable/connect_btn_background"
-            android:drawableTop="@drawable/ic_connect_clak"
+            android:background="@drawable/clak_icon"
             android:textColor="@color/white"
-            android:paddingTop="@dimen/textSmall"
 
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -133,6 +153,17 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.15" />
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="130dp"
+            android:background="@drawable/ic_bot_wave"
+
+            android:backgroundTint="#EA0C1C"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
