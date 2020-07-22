@@ -25,6 +25,40 @@
         app:layout_constraintVertical_bias="0.0"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
+    <View
+        android:id="@+id/redcircle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:alpha="0.9"
+        android:background="@drawable/ic_blob2"
+        android:backgroundTint="@color/zxing_viewfinder_laser"
+        android:rotationX="-10"
+        android:rotationY="-20"
+        app:layout_constraintBottom_toBottomOf="@+id/organizationClakButton"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+
+    <View
+        android:id="@+id/yellowcircle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:alpha="0.9"
+        android:background="@drawable/ic_blob2"
+        app:layout_constraintBottom_toTopOf="@+id/organizationClakButton"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+    <View
+    android:layout_width="match_parent"
+    android:layout_height="130dp"
+    android:background="@drawable/ic_bot_wave"
+    android:backgroundTint="#EA0C1C"
+
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent" />
+
+
     <ImageView
         android:id="@+id/orgPic"
         android:layout_width="match_parent"
@@ -34,7 +68,10 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
         app:layout_constraintVertical_bias="0.05"
-        tools:layout_editor_absoluteX="-16dp" />
+        tools:layout_editor_absoluteX="-16dp"
+        />
+
+
 
     <TextView
         android:id="@+id/name"
@@ -58,6 +95,7 @@
         android:text="@string/email_address"
         android:textSize="20sp"
         android:fontFamily="@font/reem_kufi"
+        android:textColor="@color/white"
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -65,20 +103,17 @@
         app:layout_constraintTop_toBottomOf="@+id/name"
         app:layout_constraintVertical_bias="0.051" />
 
+
     <Button
         android:id="@+id/organizationClakButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/avatar_size_half"
+        android:layout_height="@dimen/avatar_size_half"
         android:layout_weight="1"
-        android:background="@drawable/connect_btn_background"
-        android:drawableLeft="@drawable/ic_connect_clak"
-        android:paddingHorizontal="10dp"
-        android:text="Clak"
-        android:textColor="@color/white"
-        android:fontFamily="@font/reem_kufi"
+        android:background="@drawable/clak_icon"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.9"
+        app:layout_constraintHorizontal_bias="0.896"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.94" />
@@ -91,7 +126,6 @@
         android:paddingHorizontal="10dp"
         android:text="@string/my_clients"
         android:textColor="@color/white"
-        android:fontFamily="@font/reem_kufi"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -104,17 +138,16 @@
         android:layout_height="wrap_content"
         android:background="@drawable/connect_btn_background"
         android:drawableLeft="@drawable/ic_add"
-        android:fontFamily="@font/reem_kufi"
         android:paddingHorizontal="10dp"
         android:text="Add new Client"
         android:textColor="@color/white"
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintHorizontal_bias="0.101"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.94" />
+        app:layout_constraintVertical_bias="0.939" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

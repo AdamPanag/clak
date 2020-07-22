@@ -29,35 +29,17 @@
         android:focusable="true"
         android:focusableInTouchMode="true">
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/ic_blob1_cmain"
-            app:layout_constraintBottom_toTopOf="@id/customerClakButton"
-            android:layout_marginRight="@dimen/avatar_size_half"
-            android:rotation="80"
-            app:layout_constraintStart_toStartOf="parent" />
-
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintRight_toRightOf="parent"
-            android:background="@drawable/ic_blob2_cmain"
-            android:layout_marginLeft="@dimen/avatar_size_large"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/myConnectionsBtn" />
 
         <Button
             android:id="@+id/customerClakButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/avatar_size_half"
+            android:layout_height="@dimen/avatar_size_half"
             android:layout_weight="1"
             android:background="@drawable/connect_btn_background"
-            android:drawableLeft="@drawable/ic_connect_clak"
-            android:paddingHorizontal="10dp"
-            android:text="Clak"
+            android:drawableTop="@drawable/ic_connect_clak"
             android:textColor="@color/white"
+            android:paddingTop="@dimen/textSmall"
+
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.9"
