@@ -20,6 +20,9 @@
     <color name="pink">#fb4c69</color>
     <color name="yellow">#f4e139</color>
     <color name="Cyan">#00FFFF</color>
+    <color name="greenyellow">#ADFF2F</color>
+    <color name="orangelight">#FFA500</color>
+    <color name="yellowlight">#FFFF00</color>
 
     <color name="galleryBg">#212121</color>
 

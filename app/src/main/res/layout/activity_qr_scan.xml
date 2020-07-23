@@ -8,17 +8,199 @@
     android:background="@color/white"
     android:padding="8dp">
 
+
     <SurfaceView
         android:id="@+id/camera_view"
-        android:layout_width="359dp"
-        android:layout_height="289dp"
+        android:layout_width="360dp"
+        android:layout_height="290dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.49"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/step4"
-        app:layout_constraintVertical_bias="0.37" />
+        app:layout_constraintTop_toBottomOf="@+id/steps"
+        app:layout_constraintVertical_bias="0.122" />
+
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:id="@+id/steps"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:id="@+id/firstrow"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <LinearLayout
+                android:id="@+id/qrcode"
+                android:layout_width="@dimen/avatar_size_large"
+                android:layout_height="@dimen/avatar_size_large"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="@dimen/avatar_size"
+                    android:layout_height="@dimen/avatar_size"
+                    android:background="@drawable/steps"
+                    android:elevation="5dp"
+                    android:backgroundTint="@color/yellowlight"
+                    android:layout_gravity="center">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="@dimen/avatar_size"
+                        android:layout_height="@dimen/avatar_size"
+                        android:layout_centerInParent="true"
+                        android:src="@drawable/s1" />
+
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/textTitle"
+                    android:text="Wait QR code"
+                    android:gravity="center"
+                    android:textAlignment="center" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ssbutton"
+                android:layout_width="@dimen/avatar_size_large"
+                android:layout_height="@dimen/avatar_size_large"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="@dimen/avatar_size"
+                    android:layout_height="@dimen/avatar_size"
+                    android:background="@drawable/steps"
+                    android:elevation="5dp"
+                    android:backgroundTint="@color/orangelight"
+                    android:layout_gravity="center">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="@dimen/avatar_size"
+                        android:layout_height="@dimen/avatar_size"
+                        android:layout_centerInParent="true"
+                        android:src="@drawable/s2" />
+
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Press the button to scan"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/textTitle"
+                    android:gravity="center"
+                    android:textAlignment="center" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/secondrow"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+                <LinearLayout
+                    android:id="@+id/aimcamera"
+                    android:layout_width="@dimen/avatar_size_large"
+                    android:layout_height="@dimen/avatar_size_large"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="@dimen/avatar_size"
+                        android:layout_height="@dimen/avatar_size"
+                        android:background="@drawable/steps"
+                        android:elevation="5dp"
+                        android:backgroundTint="@color/greenyellow"
+                        android:layout_gravity="center">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="@dimen/avatar_size_large"
+                            android:layout_height="@dimen/avatar_size_large"
+                            android:layout_centerInParent="true"
+                            android:src="@drawable/s3"/>
+
+                    </RelativeLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/textTitle"
+                        android:text="Scan the QR code"
+                        android:gravity="center"
+                        android:textAlignment="center" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                android:id="@+id/clak"
+                android:layout_width="@dimen/avatar_size_large"
+                android:layout_height="@dimen/avatar_size_large"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="@dimen/avatar_size"
+                    android:layout_height="@dimen/avatar_size"
+                    android:background="@drawable/steps"
+                    android:elevation="5dp"
+                    android:backgroundTint="@color/blue"
+                    android:layout_gravity="center">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="@dimen/avatar_size_large"
+                        android:layout_height="@dimen/avatar_size_large"
+                        android:layout_centerInParent="true"
+                        android:tint="@color/white"
+                        android:src="@drawable/s4"/>
+
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/textTitle"
+                    android:text="...and CLAK!"
+                    android:gravity="center"
+                    android:textAlignment="center" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/view2"
+        android:layout_width="@dimen/avatar_size"
+        android:layout_height="@dimen/avatar_size_large"
+        android:background="@drawable/scan_people"
+
+        android:rotation="-10"
+        app:layout_constraintBottom_toBottomOf="@+id/camera_view"
+        app:layout_constraintEnd_toEndOf="@+id/camera_view"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/camera_view"
+        app:layout_constraintVertical_bias="1.3" />
 
     <Button
         android:id="@+id/startScan"
@@ -26,78 +208,15 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/camera_view"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="8dp"
-        android:background="@color/blue"
+        android:background="@color/gray_dark"
         android:padding="5dp"
         android:text="@string/startScan"
         android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/camera_view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/camera_view" />
-
-    <TextView
-        android:id="@+id/step1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:fontFamily="@font/reem_kufi"
-        android:gravity="left"
-        android:text="1. Wait for the customer, to generate his QR Code"
-        android:textColor="@color/black"
-        android:textSize="@dimen/textLarge"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/camera_view"
         app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
-        android:id="@+id/step2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="8dp"
-        android:fontFamily="@font/reem_kufi"
-        android:gravity="left"
-        android:text="2. Press the 'START SCANNING' button"
-        android:textColor="@color/black"
-        android:textSize="@dimen/textLarge"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/step1" />
-
-
-    <TextView
-        android:id="@+id/step3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="8dp"
-        android:fontFamily="@font/reem_kufi"
-        android:gravity="left"
-        android:text="3. Aim your camera at QR Code"
-        android:textColor="@color/black"
-        android:textSize="@dimen/textLarge"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/step2" />
-
-    <TextView
-        android:id="@+id/step4"
-        android:layout_width="375dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="8dp"
-        android:fallbackLineSpacing="false"
-        android:fontFamily="@font/reem_kufi"
-        android:gravity="center"
-        android:text="...and CLAK!"
-        android:textColor="@color/blue"
-        android:textSize="@dimen/textLarge"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/step3" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
