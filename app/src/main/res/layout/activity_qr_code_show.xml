@@ -6,13 +6,110 @@
     android:layout_height="match_parent"
     tools:context=".QrCodeShowActivity">
 
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+
+        android:layout_marginTop="10dp"
+        app:layout_constraintBottom_toTopOf="@id/qrCodeImg"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <View
+            android:id="@+id/topwave"
+            android:layout_width="wrap_content"
+            android:layout_height="160dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/ic_topscanwave"
+            android:backgroundTint="@color/black" />
+
+        <ImageView
+            android:id="@+id/scanboy"
+            android:layout_width="@dimen/avatar_size_large"
+            android:layout_height="@dimen/avatar_size_large"
+
+            android:layout_above="@id/topwave"
+
+            android:layout_alignBaseline="@id/topwave"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="100dp"
+            android:src="@drawable/scanboy_draw"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/rtc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+
+            android:layout_marginStart="168dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginEnd="110dp"
+            android:layout_marginRight="110dp"
+
+            android:fontFamily="@font/coiny"
+            android:gravity="center"
+            android:text="Ready to \nCLAK?"
+            android:textColor="@color/black"
+            android:textSize="@dimen/textExtra" />
+
+    </RelativeLayout>
+
     <ImageView
         android:id="@+id/qrCodeImg"
-        android:layout_width="243dp"
-        android:layout_height="243dp"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+
+        app:layout_constraintVertical_bias="0.6"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_connect_clak" />
+        android:src="@drawable/ic_connect_clak" />
+
+    <View
+        android:id="@+id/botwave2"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:background="@drawable/ic_botwave2"
+
+        android:backgroundTint="#3CB371"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/qrCodeImg" />
+
+    <View
+        android:id="@+id/botwave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ic_botwave1"
+
+        android:backgroundTint="#00FF7F"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/qrCodeImg" />
+
+    <View
+        android:layout_width="@dimen/avatar_size_large"
+        android:layout_height="@dimen/avatar_size_large"
+        android:background="@drawable/scangirl_draw"
+        android:rotation="-10"
+
+        app:layout_constraintHorizontal_bias="0.4"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/qrCodeImg" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
