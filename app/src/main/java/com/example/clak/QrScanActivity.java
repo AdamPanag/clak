@@ -6,6 +6,7 @@ import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.VibrationEffect;
@@ -48,6 +49,7 @@ public class QrScanActivity extends AppCompatActivity {
     Button scanBtn;
     BarcodeDetector barcodeDetector;
     CameraSource cameraSource;
+    MediaPlayer mediaPlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -206,7 +208,12 @@ public class QrScanActivity extends AppCompatActivity {
     }
 
     private void playSound(boolean success) {
-        // TODO: Create this function.
-        // On success play a clak sound, on failure play buzzer
+        if (success == true) {
+            mediaPlayer = MediaPlayer.create(this, R.raw.accomplished);
+            mediaPlayer.start();
+        } else {
+            mediaPlayer = MediaPlayer.create(this, R.raw.failure);
+            mediaPlayer.start();
+        }
     }
 }

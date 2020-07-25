@@ -24,7 +24,8 @@
         <meta-data
             android:name="com.google.android.gms.vision.DEPENDENCIES"
             android:value="barcode" /> <!-- barcode,face,ocr -->
-        <activity android:name=".QrScanActivity" />
+        <activity android:name=".QrScanActivity"
+            android:screenOrientation="portrait"/>
         <activity android:name=".MyClientsActivity"
             android:screenOrientation="portrait"/>
         <activity android:name=".MyConnectionsActivity"

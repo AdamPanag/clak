@@ -66,7 +66,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/textTitle"
+                    android:textSize="@dimen/textLarge"
                     android:text="Wait QR code"
                     android:gravity="center"
                     android:textAlignment="center" />
@@ -101,7 +101,7 @@
                     android:layout_height="match_parent"
                     android:text="Press the button to scan"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/textTitle"
+                    android:textSize="@dimen/textLarge"
                     android:gravity="center"
                     android:textAlignment="center" />
 
@@ -143,7 +143,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/textTitle"
+                        android:textSize="@dimen/textLarge"
                         android:text="Scan the QR code"
                         android:gravity="center"
                         android:textAlignment="center" />
@@ -178,7 +178,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/textTitle"
+                    android:textSize="@dimen/textLarge"
                     android:text="...and CLAK!"
                     android:gravity="center"
                     android:textAlignment="center" />
@@ -188,19 +188,6 @@
         </LinearLayout>
 
     </LinearLayout>
-
-    <View
-        android:id="@+id/view2"
-        android:layout_width="@dimen/avatar_size"
-        android:layout_height="@dimen/avatar_size_large"
-        android:background="@drawable/scan_people"
-
-        android:rotation="-10"
-        app:layout_constraintBottom_toBottomOf="@+id/camera_view"
-        app:layout_constraintEnd_toEndOf="@+id/camera_view"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/camera_view"
-        app:layout_constraintVertical_bias="1.3" />
 
     <Button
         android:id="@+id/startScan"

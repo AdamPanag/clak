@@ -203,7 +203,7 @@ public class MyClientsActivity extends AppCompatActivity {
                         // Calculate times claked
                         holder.clak_count.setText(R.string.counting_claks);
                         FirebaseFirestore.getInstance().collection("claks")
-                                .whereEqualTo("customer_id", customer_uids.get(position))
+                                .whereEqualTo("customer_id", model.getId())
                                 .whereEqualTo("organization_id", organization_id)
                                 .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                             @Override
