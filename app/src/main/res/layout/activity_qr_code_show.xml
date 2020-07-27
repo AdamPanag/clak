@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/blue_with_opacity"
     tools:context=".QrCodeShowActivity">
 
 
@@ -25,20 +26,19 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentBottom="true"
             android:background="@drawable/ic_topscanwave"
-            android:backgroundTint="@color/black" />
+            android:backgroundTint="@color/gray" />
 
         <ImageView
             android:id="@+id/scanboy"
             android:layout_width="@dimen/avatar_size_large"
             android:layout_height="@dimen/avatar_size_large"
-
             android:layout_above="@id/topwave"
-
             android:layout_alignBaseline="@id/topwave"
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="100dp"
             android:src="@drawable/scanboy_draw"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:visibility="gone"/>
 
     </RelativeLayout>
 
@@ -79,16 +79,17 @@
         app:layout_constraintTop_toBottomOf="@+id/qrCodeImg" />
 
     <View
-        android:layout_width="@dimen/avatar_size_large"
-        android:layout_height="@dimen/avatar_size_large"
+        android:layout_width="180dp"
+        android:layout_height="159dp"
         android:background="@drawable/scangirl_draw"
         android:rotation="-10"
 
-        app:layout_constraintHorizontal_bias="0.4"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.4"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/qrCodeImg" />
+        app:layout_constraintTop_toBottomOf="@+id/qrCodeImg"
+        android:visibility="gone"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
